@@ -16,8 +16,9 @@ constructor(private router: Router) { }
   checkForm(form) {
     if (form.login === 'admin' && form.password === 'kobzar') {
       localStorage.setItem('auth', 'true');
+      this.router.navigate(['/admin']);
+      return false;
     }
-    this.router.navigate(['/admin']);
-
+    return true;
   }
 }

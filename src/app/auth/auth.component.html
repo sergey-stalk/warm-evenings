@@ -1,5 +1,5 @@
 <form class="auth-form" [formGroup]="form" (ngSubmit)="checkingAuth()">
-  <div class="err-alert"></div>
+  <div [ngClass]='alertClass' class="alert alert-danger" role="alert">Не верный логин или пароль</div>
   <input type="text" placeholder="Login" class="form-control" formControlName="login">
   <input type="password" placeholder="Password" class="form-control" formControlName="password">
   <button [disabled]="form.invalid" type="submit" class="btn btn-success">Войти</button>

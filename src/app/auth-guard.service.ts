@@ -12,12 +12,8 @@ constructor(private checkAuthService: CheckAuthService, private router: Router) 
     if (this.checkAuthService.checkStorage()) {
       return true;
     }
-    this.router.navigate(['/auth'], {
-      queryParams: {
-        return: state.url
-      }
-    });
+
+    this.router.navigate(['/auth']);
     return false;
   }
-
 }

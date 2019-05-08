@@ -19,6 +19,7 @@ export class MeetingReductComponent implements OnInit {
   ngOnInit() {
     this.apiDataService.getApiData().subscribe((res) => {
       this.data = res;
+      this.data = this.data.reverse();
     });
 
     this.form = new FormGroup({

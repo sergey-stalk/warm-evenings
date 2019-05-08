@@ -10,7 +10,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AuthComponent implements OnInit {
 
   constructor(private checkAuthService: CheckAuthService) { }
+
   form: FormGroup;
+  invalidStatus = false;
+  alertClass = '';
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -20,7 +23,13 @@ export class AuthComponent implements OnInit {
   }
 
   checkingAuth() {
-    this.checkAuthService.checkForm(this.form.value);
+    this.invalidStatus = this.checkAuthService.checkForm(this.form.value);
+    if (this.invalidStatus) {
+      this.alertClass = 'show';
+      setTimeout(() => {this.alertClass = ''; }, 3000);
+    } else {
+      this.alertClass = '';
+    }
   }
 
 }
