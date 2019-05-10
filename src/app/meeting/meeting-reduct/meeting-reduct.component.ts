@@ -46,7 +46,7 @@ export class MeetingReductComponent implements OnInit {
 
   addData() {
     const nData = this.data.concat(this.form.value);
-    this.data = nData;
+    this.data.unshift(this.form.value);
     this.apiDataService.updateData(nData);
     this.writeNewData();
   }

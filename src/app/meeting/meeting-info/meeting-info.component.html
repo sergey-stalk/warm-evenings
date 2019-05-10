@@ -1,3 +1,8 @@
 <ul class="list-group">
-  <li class="list-group-item" *ngFor="let item of data">{{item.text}} <br>{{item.date |date}} | <b>{{item.autor}}</b></li>
+  <li class="list-group-item" *ngFor="let item of data; let i = index">
+    {{item.text}} <br>
+    {{item.date |date}} | <b>
+    {{item.autor}}</b>
+    <span class="new-meet" *ngIf="i === 0">New</span>
+  </li>
 </ul>

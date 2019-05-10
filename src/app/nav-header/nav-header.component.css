@@ -1,0 +1,12 @@
+.navbar-brand{
+  padding: 0;
+}
+
+img {
+  height: 50px;
+}
+
+.nav-item {
+  color: white !important;
+  cursor: pointer;
+}

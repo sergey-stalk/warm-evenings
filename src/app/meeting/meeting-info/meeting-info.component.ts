@@ -16,6 +16,7 @@ export class MeetingInfoComponent implements OnInit {
   ngOnInit() {
     this.apiDataService.getApiData().subscribe((res) => {
       this.data = res;
+      this.data = this.data.reverse();
     });
   }
 
