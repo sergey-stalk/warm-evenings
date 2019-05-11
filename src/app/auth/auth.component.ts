@@ -1,4 +1,4 @@
-import { CheckAuthService } from '../check-auth.service';
+import { CheckAuthService } from '../services/check-auth.service';
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';

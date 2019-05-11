@@ -1,4 +1,4 @@
-import { ApiDataService } from '../api-data.service';
+import { ApiDataService } from './../../services/api-data.service';
 
 import { Component, OnInit } from '@angular/core';
 

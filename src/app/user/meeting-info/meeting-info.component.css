@@ -1,11 +1,11 @@
 .new-meet {
   background: red;
-  width: 7%;
+  width: 5%;
   position: absolute;
   text-align: center;
-  right: 3%;
+  right: 0;
   top: 0;
-  height: 40%;
+  height: 22px;
   min-width: 50px;
-  max-height: 30px;
+  font-size: 1em;
 }

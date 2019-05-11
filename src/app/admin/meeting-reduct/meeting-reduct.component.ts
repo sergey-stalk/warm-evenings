@@ -1,5 +1,5 @@
-import { ApiDataService } from '../api-data.service';
-
+import { TelegramAlertService } from './../../services/telegram-alert.service';
+import { ApiDataService } from './../../services/api-data.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class MeetingReductComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService) { }
+  constructor(private apiDataService: ApiDataService, private telegramAlertService: TelegramAlertService) { }
   data: any = [];
   dataWriten = true;
 
@@ -19,7 +19,7 @@ export class MeetingReductComponent implements OnInit {
   ngOnInit() {
     this.apiDataService.getApiData().subscribe((res) => {
       this.data = res;
-      this.data = this.data.reverse();
+      this.data.reverse();
     });
 
     this.form = new FormGroup({
@@ -30,14 +30,13 @@ export class MeetingReductComponent implements OnInit {
   }
 
   delete(index) {
-    const nData = this.data.filter((el, i) => {
+    const dData = this.data.filter((el, i) => {
       if (index !== i) {
         return el;
       }
     });
-
-    this.data = nData;
-    this.apiDataService.updateData(nData);
+    this.data = dData;
+    this.apiDataService.updateData(dData);
   }
 
   writeNewData() {
@@ -45,9 +44,11 @@ export class MeetingReductComponent implements OnInit {
   }
 
   addData() {
-    const nData = this.data.concat(this.form.value);
-    this.data.unshift(this.form.value);
+    const nData = this.data.reverse().concat(this.form.value);
+    this.data.reverse().unshift(this.form.value);
     this.apiDataService.updateData(nData);
     this.writeNewData();
+    const message = `${this.form.value.text}%0A${this.form.value.date} | ${this.form.value.autor}`;
+    /* this.telegramAlertService.sandMassage(message); */
   }
 }
