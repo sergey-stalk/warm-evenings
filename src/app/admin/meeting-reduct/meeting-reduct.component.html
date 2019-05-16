@@ -1,3 +1,7 @@
+<div *ngIf="data.length < 1" id="preloader">
+  <div id="loader"></div>
+</div>
+
 <ul class="list-group">
   <li id="{{i}}" class="list-group-item" *ngFor="let item of data; let i = index">
     {{item.text}} <br>
@@ -5,7 +9,7 @@
     <b>{{item.autor}}</b> 
     <i (click)="delete(i)" class="fas fa-times"></i></li>
 
-    <li (click)="writeNewData()" *ngIf="dataWriten" class="btn-list-item list-group-item"><button class="btn btn-success">Добавить встречу</button></li>
+    <li (click)="writeNewData()" *ngIf="dataWriten" class="btn-list-item list-group-item"><button *ngIf="settings" class="btn btn-success">Добавить встречу</button></li>
 
     <li *ngIf="!dataWriten" class="list-group-item">
       <form [formGroup]="form" (ngSubmit)="addData()">

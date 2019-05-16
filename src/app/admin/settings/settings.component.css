@@ -1,0 +1,16 @@
+.settings {
+  margin-top: 15px;
+  margin-right: 115px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 3px;
+  margin: 0;
+}
+
+.item {
+  display: block;
+}
+

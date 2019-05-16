@@ -1,0 +1,9 @@
+.btn {
+  margin-top: 8px;
+}
+
+form {
+  margin-top: 10px;
+  width: calc(100% - 115px);
+  min-width: 110px;
+}

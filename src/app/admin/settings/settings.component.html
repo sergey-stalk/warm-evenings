@@ -1,0 +1,10 @@
+<div *ngIf="!settings" id="preloader">
+  <div id="loader"></div>
+</div>
+
+<div *ngIf="settings" class="settings">
+  <div class="item">
+    <p> Телеграм бот {{state}}</p>
+    <button (click)="chengeState()" class="btn btn-success">{{btnState}}</button>
+  </div>
+</div>

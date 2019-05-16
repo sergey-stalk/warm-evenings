@@ -15,6 +15,7 @@ export class MeetingReductComponent implements OnInit {
   dataWriten = true;
 
   form: FormGroup;
+  settings;
 
   ngOnInit() {
     this.apiDataService.getApiData().subscribe((res) => {
@@ -27,6 +28,11 @@ export class MeetingReductComponent implements OnInit {
       date: new FormControl('', Validators.required),
       text: new FormControl('' , Validators.required)
     });
+
+    this.apiDataService.getSettings().subscribe((settings) => {
+      this.settings = settings;
+    });
+
   }
 
   delete(index) {
@@ -49,6 +55,9 @@ export class MeetingReductComponent implements OnInit {
     this.apiDataService.updateData(nData);
     this.writeNewData();
     const message = `${this.form.value.text}%0A${this.form.value.date} | ${this.form.value.autor}`;
-    /* this.telegramAlertService.sandMassage(message); */
+    if (this.settings.telegram) {
+      this.telegramAlertService.sandMessage(message);
+    }
+    this.form.reset();
   }
 }

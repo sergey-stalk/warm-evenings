@@ -1,0 +1,4 @@
+<form  [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+  <textarea class="form-control" rows="3" formControlName="message"></textarea>
+  <button class="btn btn-success" type="submit">Отправить</button>
+</form>

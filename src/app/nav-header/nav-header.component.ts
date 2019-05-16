@@ -9,17 +9,31 @@ import { Router, NavigationEnd } from '@angular/router';
 export class NavHeaderComponent implements OnInit {
 
   constructor(private router: Router) { }
+
   isAdmin = false;
-  headerLinks = [{name: 'Встречи', link: ''}, {name: 'Редактор', link: '/admin'}];
+
+  headerLinks = [
+    {name: 'Главная', link: ''},
+    {name: 'Встречи', link: '/schedule'},
+  ];
+
+  adminHeaderLinks = [
+    {name: 'Редактор', link: '/admin'},
+    {name: 'Настройки', link: '/admin/settings'},
+    {name: 'Сообщения', link: '/admin/message'}
+  ];
 
   ngOnInit() {
-    this.router.events.subscribe((e) => {
+    if (localStorage.auth === 'true') {
+      this.isAdmin = true;
+    }
+    /* this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         if (e.url === '/admin') {
           this.isAdmin = true;
         }
       }
-    });
+    }); */
   }
   exit() {
     localStorage.clear();

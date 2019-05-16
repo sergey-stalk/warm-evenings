@@ -3,10 +3,25 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+  
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav bg-dark">
+    <div *ngIf="!isAdmin" class="navbar-nav bg-dark">
       <a class="nav-item nav-link" *ngFor="let item of headerLinks" routerLink='{{item.link}}'>{{item.name}}</a>
-      <a class="nav-item nav-link" *ngIf="isAdmin" (click)="exit()" >Выход</a>
+      <a class="nav-item nav-link" *ngIf="isAdmin" routerLink='/auth'>Войти</a>
+    </div>
+    <div *ngIf="isAdmin" class="navbar-nav bg-dark">
+      <a class="nav-item nav-link" *ngFor="let item of headerLinks" routerLink='{{item.link}}'>{{item.name}}</a>
+      <a *ngIf="isAdmin" class="nav-item nav-link" routerLink='/auth'>Войти</a>
     </div>
   </div>
 </nav>
+
+<!-- <div *ngIf="isAdmin" class="btn-group-vertical" role="group" aria-label="Basic example">
+  <button *ngFor="let item of adminHeaderLinks" routerLinkActive="active" type="button" class="btn btn-secondary" routerLink='{{item.link}}'>{{item.name}}</button>
+  <button type="button" class="btn btn-secondary" (click)="exit()">Выход</button>
+</div> -->
+<ul *ngIf="isAdmin" class="list-group">
+  <li *ngFor="let item of adminHeaderLinks" class="list-group-item bg-dark"><a routerLinkActive="active" class="nav-item nav-link" routerLink='{{item.link}}'>{{item.name}}</a></li>
+  <li class="list-group-item bg-dark"></li>
+</ul>
+

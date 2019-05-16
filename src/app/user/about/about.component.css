@@ -1,0 +1,17 @@
+.about {
+  margin-top: 20px;
+}
+
+.about h3{
+  text-align: center;
+}
+
+.links a {
+  text-decoration: none;
+  padding-right: 8px;
+}
+
+.mail {
+  color: blueviolet;
+  display: inline-flex;
+}
