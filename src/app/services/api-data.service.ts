@@ -14,7 +14,7 @@ constructor(private http: HttpClient) { }
   };
   urlMeeting = 'https://api.myjson.com/bins/htb96';
   urlSettings = 'https://api.myjson.com/bins/mhszu';
-  urlPoems = 'https://api.myjson.com/bins/apf7u';
+  urlPoems = 'https://api.myjson.com/bins/ot482';
 
   getApiData() {
     return this.http.get(this.urlMeeting);
@@ -35,7 +35,7 @@ constructor(private http: HttpClient) { }
   }
 
   updatePoems(poemsUpdate) {
-    this.http.put(this.urlSettings, poemsUpdate, this.httpOptions).subscribe(() => {});
+    this.http.put(this.urlSettings, poemsUpdate, this.httpOptions).subscribe(() => {})
   }
 
 }

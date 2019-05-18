@@ -1,3 +1,4 @@
+import { ShowPoemsComponent } from './user/show-poems/show-poems.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CheckAuthService } from './services/check-auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,6 +29,7 @@ import { AboutComponent } from './user/about/about.component';
       SettingsComponent,
       AboutComponent,
       MessageComponent,
+      ShowPoemsComponent,
    ],
    imports: [
       BrowserModule,

@@ -1,0 +1,24 @@
+<div *ngIf="!dataPoems" id="preloader">
+  <div id="loader"></div>
+</div>
+
+<nav *ngIf="scrin !== 'autor'" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li (click)="back()" class="breadcrumb-item"><i class="fas fa-arrow-circle-left"></i></li>
+    <li *ngFor="let wayItem of wayOfPoems" class="breadcrumb-item">{{wayItem}}</li>
+  </ol>
+</nav>
+
+<div *ngIf="dataPoems" class="autors">
+  <ul class="list-group" *ngIf="scrin === 'autor'">
+    <li (click)="showPoemsList(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}</li>
+  </ul>
+
+  <ul class="list-group" *ngIf="scrin === 'poemsList'">
+    <li (click)="showPoem(i)" *ngFor="let poems of dataPoems[history[0]].poems; let i = index" class="list-group-item">{{poems.poemName}}</li>
+  </ul>
+
+  <div *ngIf="scrin === 'poem'" class="poem">
+    <h4>{{this.dataPoems[this.history[0]].poems[history[1]].poem}}</h4>
+  </div>
+</div>

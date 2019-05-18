@@ -5,13 +5,9 @@
   </button>
   
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div *ngIf="!isAdmin" class="navbar-nav bg-dark">
+    <div class="navbar-nav bg-dark">
       <a class="nav-item nav-link" *ngFor="let item of headerLinks" routerLink='{{item.link}}'>{{item.name}}</a>
-      <a class="nav-item nav-link" *ngIf="isAdmin" routerLink='/auth'>Войти</a>
-    </div>
-    <div *ngIf="isAdmin" class="navbar-nav bg-dark">
-      <a class="nav-item nav-link" *ngFor="let item of headerLinks" routerLink='{{item.link}}'>{{item.name}}</a>
-      <a *ngIf="isAdmin" class="nav-item nav-link" routerLink='/auth'>Войти</a>
+      <a class="nav-item nav-link" *ngIf="!isAdmin" routerLink='/auth'>Войти</a>
     </div>
   </div>
 </nav>
@@ -22,6 +18,6 @@
 </div> -->
 <ul *ngIf="isAdmin" class="list-group">
   <li *ngFor="let item of adminHeaderLinks" class="list-group-item bg-dark"><a routerLinkActive="active" class="nav-item nav-link" routerLink='{{item.link}}'>{{item.name}}</a></li>
-  <li class="list-group-item bg-dark"></li>
+  <li class="list-group-item bg-dark"><a (click)="exit()" class="nav-item nav-link" routerLink=''>Выйти</a></li>
 </ul>
 

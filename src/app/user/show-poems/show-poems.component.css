@@ -1,0 +1,13 @@
+nav ol {
+  margin: 0px !important;
+}
+
+.list-group-item {
+  color: blueviolet;
+  cursor: pointer;
+}
+
+.breadcrumb-item{
+  cursor: pointer;
+  color: grey;
+}

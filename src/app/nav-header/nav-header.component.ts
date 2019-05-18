@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+
 @Component({
   selector: 'app-nav-header',
   templateUrl: './nav-header.component.html',
@@ -15,6 +16,7 @@ export class NavHeaderComponent implements OnInit {
   headerLinks = [
     {name: 'Главная', link: ''},
     {name: 'Встречи', link: '/schedule'},
+    {name: 'Стихи', link: '/show_poems'}
   ];
 
   adminHeaderLinks = [
@@ -27,14 +29,15 @@ export class NavHeaderComponent implements OnInit {
     if (localStorage.auth === 'true') {
       this.isAdmin = true;
     }
-    /* this.router.events.subscribe((e) => {
+    this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         if (e.url === '/admin') {
           this.isAdmin = true;
         }
       }
-    }); */
+    });
   }
+
   exit() {
     localStorage.clear();
     this.router.navigate(['/auth']);
