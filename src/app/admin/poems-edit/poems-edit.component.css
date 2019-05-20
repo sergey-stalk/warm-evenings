@@ -1,0 +1,23 @@
+.list-item-form {
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  margin-top: 10px;
+  margin-right: 3% !important;
+}
+
+.list-group-item{
+  cursor: pointer;
+}
+
+form {
+  margin: 0;
+}
+
+.btn-danger {
+  float: right;
+}
+
+.btn {
+  margin: 10px 0 0 0;
+}

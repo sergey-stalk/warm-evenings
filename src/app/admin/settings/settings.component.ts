@@ -18,16 +18,28 @@ export class SettingsComponent implements OnInit {
   btnState = '';
 
   ngOnInit() {
-    this.apiDataService.getSettings().subscribe((settings) => {
-      this.settings = settings;
+    if (localStorage.settings) {
+      this.settings = JSON.parse(localStorage.settings);
       if (this.settings.telegram) {
-        this.state = 'Включен';
-        this.btnState = 'Отключить';
-      } else {
-        this.state = 'Отключен';
-        this.btnState = 'Включить';
-      }
-    });
+          this.state = 'Включен';
+          this.btnState = 'Отключить';
+        } else {
+          this.state = 'Отключен';
+          this.btnState = 'Включить';
+        }
+    } else {
+      this.apiDataService.getSettings().subscribe((settings) => {
+        this.settings = settings;
+        localStorage.setItem('settings', JSON.stringify(settings));
+        if (this.settings.telegram) {
+          this.state = 'Включен';
+          this.btnState = 'Отключить';
+        } else {
+          this.state = 'Отключен';
+          this.btnState = 'Включить';
+        }
+      });
+    }
   }
 
   chengeState() {
@@ -39,6 +51,7 @@ export class SettingsComponent implements OnInit {
       this.state = 'Отключен';
       this.btnState = 'Включить';
     }
+    localStorage.settings = JSON.stringify(this.settings);
     this.apiDataService.setSettings(this.settings);
   }
 }

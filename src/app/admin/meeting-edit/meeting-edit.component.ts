@@ -1,14 +1,14 @@
-import { TelegramAlertService } from './../../services/telegram-alert.service';
-import { ApiDataService } from './../../services/api-data.service';
+import { TelegramAlertService } from '../../services/telegram-alert.service';
+import { ApiDataService } from '../../services/api-data.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-meeting-reduct',
-  templateUrl: './meeting-reduct.component.html',
-  styleUrls: ['./meeting-reduct.component.css']
+  selector: 'app-meeting-edit',
+  templateUrl: './meeting-edit.component.html',
+  styleUrls: ['./meeting-edit.component.css']
 })
-export class MeetingReductComponent implements OnInit {
+export class MeetingEditComponent implements OnInit {
 
   constructor(private apiDataService: ApiDataService, private telegramAlertService: TelegramAlertService) { }
   data: any = [];
@@ -18,21 +18,31 @@ export class MeetingReductComponent implements OnInit {
   settings;
 
   ngOnInit() {
-    this.apiDataService.getApiData().subscribe((res) => {
-      this.data = res;
+    if (localStorage.meeting) {
+      this.data = JSON.parse(localStorage.meeting);
       this.data.reverse();
-    });
+    } else {
+      this.apiDataService.getApiData().subscribe((res) => {
+        this.data = res;
+        localStorage.setItem('meeting', JSON.stringify(this.data));
+        this.data.reverse();
+      });
+    }
+
+    if (localStorage.settings) {
+      this.settings = JSON.parse(localStorage.settings);
+    } else {
+      this.apiDataService.getSettings().subscribe((settings) => {
+        this.settings = settings;
+        localStorage.setItem('settings', JSON.stringify(settings));
+      });
+    }
 
     this.form = new FormGroup({
       autor: new FormControl('', Validators.required),
       date: new FormControl('', Validators.required),
       text: new FormControl('' , Validators.required)
     });
-
-    this.apiDataService.getSettings().subscribe((settings) => {
-      this.settings = settings;
-    });
-
   }
 
   delete(index) {
@@ -41,8 +51,12 @@ export class MeetingReductComponent implements OnInit {
         return el;
       }
     });
+
     this.data = dData;
+    dData.reverse();
     this.apiDataService.updateData(dData);
+    localStorage.meeting = JSON.stringify(dData);
+    dData.reverse();
   }
 
   writeNewData() {
@@ -53,6 +67,7 @@ export class MeetingReductComponent implements OnInit {
     const nData = this.data.reverse().concat(this.form.value);
     this.data.reverse().unshift(this.form.value);
     this.apiDataService.updateData(nData);
+    localStorage.meeting = JSON.stringify(nData);
     this.writeNewData();
     const message = `${this.form.value.text}%0A${this.form.value.date} | ${this.form.value.autor}`;
     if (this.settings.telegram) {

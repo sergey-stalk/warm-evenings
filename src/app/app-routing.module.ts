@@ -1,6 +1,6 @@
 import { ShowPoemsComponent } from './user/show-poems/show-poems.component';
 import { SettingsComponent } from './admin/settings/settings.component';
-import { MeetingReductComponent } from './admin/meeting-reduct/meeting-reduct.component';
+import { MeetingEditComponent } from './admin/meeting-edit/meeting-edit.component';
 import { MeetingInfoComponent } from './user/meeting-info/meeting-info.component';
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard } from './services/auth-guard.service';
@@ -9,6 +9,7 @@ import { AboutComponent } from './user/about/about.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { PoemsEditComponent } from './admin/poems-edit/poems-edit.component';
 
 
 const routes: Routes = [
@@ -16,9 +17,10 @@ const routes: Routes = [
   {path: 'schedule', component: MeetingInfoComponent},
   {path: 'auth', component: AuthComponent},
   {path: 'show_poems', component: ShowPoemsComponent},
-  {path: 'admin', component: MeetingReductComponent, canActivate: [AuthGuard]},
+  {path: 'admin', component: MeetingEditComponent, canActivate: [AuthGuard]},
   {path: 'admin/settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'admin/message', component: MessageComponent, canActivate: [AuthGuard]},
+  {path:  'admin/poems_edit', component: PoemsEditComponent, canActivate: [AuthGuard]}
 
 ];
 

@@ -1,3 +1,4 @@
+import { PoemsEditComponent } from './admin/poems-edit/poems-edit.component';
 import { ShowPoemsComponent } from './user/show-poems/show-poems.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CheckAuthService } from './services/check-auth.service';
@@ -10,7 +11,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiDataService } from './services/api-data.service';
-import { MeetingReductComponent } from './admin/meeting-reduct/meeting-reduct.component';
+import { MeetingEditComponent } from './admin/meeting-edit/meeting-edit.component';
 import { MeetingInfoComponent } from './user/meeting-info/meeting-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
@@ -23,13 +24,14 @@ import { AboutComponent } from './user/about/about.component';
    declarations: [
       AppComponent,
       MeetingInfoComponent,
-      MeetingReductComponent,
+      MeetingEditComponent,
       NavHeaderComponent,
       AuthComponent,
       SettingsComponent,
       AboutComponent,
       MessageComponent,
       ShowPoemsComponent,
+      PoemsEditComponent,
    ],
    imports: [
       BrowserModule,

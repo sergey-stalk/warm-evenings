@@ -18,9 +18,14 @@ export class ShowPoemsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.apiDataService.getPoems().subscribe((data) => {
-      this.dataPoems = data;
-    });
+    if (localStorage.poems) {
+      this.dataPoems = JSON.parse(localStorage.poems);
+    } else {
+      this.apiDataService.getPoems().subscribe((data) => {
+        this.dataPoems = data;
+        localStorage.setItem('poems', JSON.stringify(data));
+      });
+    }
   }
   showPoemsList(i) {
     this.scrin = 'poemsList';

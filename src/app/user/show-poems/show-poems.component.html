@@ -9,7 +9,7 @@
   </ol>
 </nav>
 
-<div *ngIf="dataPoems" class="autors">
+<div *ngIf="dataPoems" class="wrapper">
   <ul class="list-group" *ngIf="scrin === 'autor'">
     <li (click)="showPoemsList(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}</li>
   </ul>

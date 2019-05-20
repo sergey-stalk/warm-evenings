@@ -20,9 +20,10 @@ export class NavHeaderComponent implements OnInit {
   ];
 
   adminHeaderLinks = [
-    {name: 'Редактор', link: '/admin'},
+    {name: 'Встречи', link: '/admin'},
     {name: 'Настройки', link: '/admin/settings'},
-    {name: 'Сообщения', link: '/admin/message'}
+    {name: 'Сообщения', link: '/admin/message'},
+    {name: 'Стихи', link: '/admin/poems_edit'}
   ];
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class NavHeaderComponent implements OnInit {
   }
 
   exit() {
-    localStorage.clear();
+    localStorage.auth = 'false';
     this.router.navigate(['/auth']);
     this.isAdmin = false;
   }

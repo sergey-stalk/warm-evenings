@@ -35,7 +35,8 @@ constructor(private http: HttpClient) { }
   }
 
   updatePoems(poemsUpdate) {
-    this.http.put(this.urlSettings, poemsUpdate, this.httpOptions).subscribe(() => {})
+    this.http.put(this.urlPoems, poemsUpdate, this.httpOptions).subscribe((res) => {console.log(res);
+    });
   }
 
 }

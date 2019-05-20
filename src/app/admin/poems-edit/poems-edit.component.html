@@ -1,0 +1,42 @@
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+      aria-controls="pills-home" aria-selected="true">Автор</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-poems-name-tab" data-toggle="pill" href="#pills-poems-name" role="tab"
+      aria-controls="pills-poems-name" aria-selected="false">Название</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-poems-text-tab" data-toggle="pill" href="#pills-poems-text" role="tab"
+      aria-controls="pills-poems-text" aria-selected="false">Стих</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-add-poems-tab" data-toggle="pill" href="#pills-add-poems" role="tab"
+      aria-controls="pills-add-poems" aria-selected="false">Добавить</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="wrapper">
+      <div class="autor">
+        <ul *ngIf="!isEditingAutor" class="list-group">
+          <li (click)="editAutor(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}
+            <i class="fas fa-edit"></i></li>
+        </ul>
+        <ul *ngIf="isEditingAutor" class="list-group">
+          <li class="list-group-item list-item-form">
+            <form [formGroup]="autor" class="form-group" (submit)='successEditAutor()'>
+              <input type="text" class="form-control" formControlName="autorFild">
+              <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
+              <button (click)="cancel()" type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="pills-poems-name" role="tabpanel" aria-labelledby="pills-poems-name-tab">Text 2</div>
+  <div class="tab-pane fade" id="pills-poems-text" role="tabpanel" aria-labelledby="pills-poems-text-tab">Text 3</div>
+  <div class="tab-pane fade" id="pills-add-poems" role="tabpanel" aria-labelledby="pills-add-poems-tab">Text 4</div>
+</div>

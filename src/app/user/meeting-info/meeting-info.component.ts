@@ -14,10 +14,16 @@ export class MeetingInfoComponent implements OnInit {
   data: any = [];
 
   ngOnInit() {
-    this.apiDataService.getApiData().subscribe((res) => {
-      this.data = res;
-      this.data = this.data.reverse();
-    });
+    if (localStorage.meeting) {
+      this.data = JSON.parse(localStorage.meeting);
+      this.data.reverse();
+    } else {
+      this.apiDataService.getApiData().subscribe((res) => {
+        this.data = res;
+        localStorage.setItem('meeting', JSON.stringify(this.data));
+        this.data.reverse();
+      });
+    }
   }
 
 
