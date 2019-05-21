@@ -3,7 +3,6 @@
   margin: 0;
   border: none !important;
   margin-top: 10px;
-  margin-right: 3% !important;
 }
 
 .list-group-item{
@@ -20,4 +19,8 @@ form {
 
 .btn {
   margin: 10px 0 0 0;
+}
+
+#pills-add-poems{
+  white-space: pre-wrap;
 }
