@@ -22,21 +22,7 @@
 <div class="tab-content" id="pills-tabContent">
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
     <div class="wrapper">
-      <div class="autor">
-        <ul *ngIf="!isEditingAutor" class="list-group">
-          <li (click)="editAutor(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}
-            <i class="fas fa-edit"></i></li>
-        </ul>
-        <ul *ngIf="isEditingAutor" class="list-group">
-          <li class="list-group-item list-item-form">
-            <form [formGroup]="autor" class="form-group" (submit)='successEditAutor()'>
-              <input type="text" class="form-control" formControlName="autorFild">
-              <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-              <button (click)="cancel()" type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
-            </form>
-          </li>
-        </ul>
-      </div>
+      
     </div>
   </div>
   <div class="tab-pane fade" id="pills-poems-name" role="tabpanel" aria-labelledby="pills-poems-name-tab">
@@ -61,8 +47,8 @@
           <li class="list-group-item list-item-form">
             <form (submit)="successEditAutor()" [formGroup]="poemName" class="form-group">
               <input type="text" class="form-control" formControlName="poemNameFild">
-              <button type="submit" class="btn btn-success"><i class="fas fa-check"></i></button>
-              <button (click)="cancel()" type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+              <button type="submit" class="btn btn-form btn-success"><i class="fas fa-check"></i></button>
+              <button (click)="cancel()" type="button" class="btn btn-form btn-danger"><i class="fas fa-times"></i></button>
             </form>
           </li>
         </ul>

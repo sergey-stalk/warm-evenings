@@ -1,3 +1,4 @@
+import { CatchDataService } from './../../services/catch-data.service';
 import { TelegramAlertService } from '../../services/telegram-alert.service';
 import { ApiDataService } from '../../services/api-data.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,31 +11,35 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class MeetingEditComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService, private telegramAlertService: TelegramAlertService) { }
-  data: any = [];
-  dataWriten = true;
+  constructor(
+    private apiDataService: ApiDataService,
+    private telegramAlertService: TelegramAlertService,
+    private catchDataService: CatchDataService,
+    ) { }
 
-  form: FormGroup;
+  meetingData;
   settings;
+  dataWriten = true;
+  form: FormGroup;
 
   ngOnInit() {
+
     if (localStorage.meeting) {
-      this.data = JSON.parse(localStorage.meeting);
-      this.data.reverse();
+      this.meetingData = this.catchDataService.getCatchItem('meeting');
+      this.meetingData.reverse();
     } else {
-      this.apiDataService.getApiData().subscribe((res) => {
-        this.data = res;
-        localStorage.setItem('meeting', JSON.stringify(this.data));
-        this.data.reverse();
+      this.apiDataService.getMeetingData().subscribe((meeting) => {
+        this.catchDataService.updateCatch('meeting', meeting);
+        this.meetingData = meeting;
+        this.meetingData.reverse();
       });
     }
 
     if (localStorage.settings) {
-      this.settings = JSON.parse(localStorage.settings);
+      this.settings = this.catchDataService.getCatchItem('settings');
     } else {
       this.apiDataService.getSettings().subscribe((settings) => {
-        this.settings = settings;
-        localStorage.setItem('settings', JSON.stringify(settings));
+        this.catchDataService.catch('settings', settings);
       });
     }
 
@@ -46,33 +51,37 @@ export class MeetingEditComponent implements OnInit {
   }
 
   delete(index) {
-    const dData = this.data.filter((el, i) => {
+    const newData = this.meetingData.filter((el, i) => {
       if (index !== i) {
         return el;
       }
     });
 
-    this.data = dData;
-    dData.reverse();
-    this.apiDataService.updateData(dData);
-    localStorage.meeting = JSON.stringify(dData);
-    dData.reverse();
+    newData.reverse();
+    this.apiDataService.updateData(newData);
+    this.catchDataService.updateCatch('meeting', newData);
+    newData.reverse();
+    this.meetingData = newData;
   }
 
   writeNewData() {
     this.dataWriten = !this.dataWriten;
   }
 
-  addData() {
-    const nData = this.data.reverse().concat(this.form.value);
-    this.data.reverse().unshift(this.form.value);
-    this.apiDataService.updateData(nData);
-    localStorage.meeting = JSON.stringify(nData);
+  addNewData() {
+    console.log(this.form.value);
+    this.meetingData.reverse().push(this.form.value);
+    this.apiDataService.updateData(this.meetingData);
+    this.catchDataService.updateCatch('meeting', this.meetingData);
+
     this.writeNewData();
+
     const message = `${this.form.value.text}%0A${this.form.value.date} | ${this.form.value.autor}`;
     if (this.settings.telegram) {
       this.telegramAlertService.sandMessage(message);
     }
+
+    this.meetingData.reverse();
     this.form.reset();
   }
 }

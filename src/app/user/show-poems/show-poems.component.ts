@@ -1,3 +1,4 @@
+import { CatchDataService } from './../../services/catch-data.service';
 import { ApiDataService } from './../../services/api-data.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowPoemsComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService) { }
+  constructor(private apiDataService: ApiDataService, private catchDataService: CatchDataService) { }
 
   dataPoems;
   wayOfPoems = [];
@@ -19,14 +20,15 @@ export class ShowPoemsComponent implements OnInit {
 
   ngOnInit() {
     if (localStorage.poems) {
-      this.dataPoems = JSON.parse(localStorage.poems);
+      this.dataPoems = this.catchDataService.getCatchItem('poems');
     } else {
-      this.apiDataService.getPoems().subscribe((data) => {
-        this.dataPoems = data;
-        localStorage.setItem('poems', JSON.stringify(data));
+      this.apiDataService.getPoems().subscribe((poems) => {
+        this.dataPoems = poems;
+        this.catchDataService.updateCatch('poems', poems);
       });
     }
   }
+
   showPoemsList(i) {
     this.scrin = 'poemsList';
     this.wayOfPoems.push(this.dataPoems[i].name);

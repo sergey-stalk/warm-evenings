@@ -11,3 +11,8 @@ nav ol {
   cursor: pointer;
   color: grey;
 }
+
+.poem {
+  white-space: pre-wrap;
+  text-align: center;
+}

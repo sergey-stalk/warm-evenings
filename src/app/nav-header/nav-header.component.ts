@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ApiDataService } from './../services/api-data.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { CatchDataService } from '../services/catch-data.service';
 
 
 @Component({
@@ -9,9 +11,15 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class NavHeaderComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private catchDataService: CatchDataService,
+    private apiDataService: ApiDataService
+  ) { }
 
   isAdmin = false;
+  isPoems = false;
+  version;
 
   headerLinks = [
     {name: 'Главная', link: ''},
@@ -23,10 +31,22 @@ export class NavHeaderComponent implements OnInit {
     {name: 'Встречи', link: '/admin'},
     {name: 'Настройки', link: '/admin/settings'},
     {name: 'Сообщения', link: '/admin/message'},
-    {name: 'Стихи', link: '/admin/poems_edit'}
+    {name: 'Стихи', link: 'admin/edit_poems/edit_autor_name'}
   ];
 
   ngOnInit() {
+    this.catchDataService.clear();
+    if (!localStorage.meeting) {
+      this.apiDataService.getMeetingData().subscribe((meetingData) => {
+        this.catchDataService.catch('meeting', meetingData);
+      });
+    }
+    if (!localStorage.poems) {
+      this.apiDataService.getPoems().subscribe((poemsData) => {
+        this.catchDataService.catch('poems', poemsData);
+      });
+    }
+
     if (localStorage.auth === 'true') {
       this.isAdmin = true;
     }
@@ -35,12 +55,17 @@ export class NavHeaderComponent implements OnInit {
         if (e.url === '/admin') {
           this.isAdmin = true;
         }
+        if (e.url.includes('edit_poems')) {
+          this.isPoems = true;
+        } else {
+          this.isPoems = false;
+        }
       }
     });
   }
 
   exit() {
-    localStorage.auth = 'false';
+    this.catchDataService.updateCatch('auth', false);
     this.router.navigate(['/auth']);
     this.isAdmin = false;
   }

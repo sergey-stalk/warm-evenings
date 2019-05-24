@@ -12,22 +12,24 @@ constructor(private http: HttpClient) { }
       'Content-Type':  'application/json; charset=utf-8',
     })
   };
+
   urlMeeting = 'https://api.myjson.com/bins/htb96';
   urlSettings = 'https://api.myjson.com/bins/mhszu';
   urlPoems = 'https://api.myjson.com/bins/ot482';
+  urlVersion = 'https://api.myjson.com/bins/12ukg8';
 
-  getApiData() {
+  getMeetingData() {
     return this.http.get(this.urlMeeting);
   }
   updateData(data) {
-    this.http.put(this.urlMeeting, data, this.httpOptions).subscribe(() => {});
+    this.http.put(this.urlMeeting, data, this.httpOptions).subscribe();
   }
   getSettings() {
     return this.http.get(this.urlSettings);
   }
 
   setSettings(settings) {
-    this.http.put(this.urlSettings, settings, this.httpOptions).subscribe(() => {});
+    this.http.put(this.urlSettings, settings, this.httpOptions).subscribe();
   }
 
   getPoems() {
@@ -35,8 +37,15 @@ constructor(private http: HttpClient) { }
   }
 
   updatePoems(poemsUpdate) {
-    this.http.put(this.urlPoems, poemsUpdate, this.httpOptions).subscribe((res) => {console.log(res);
-    });
+    this.http.put(this.urlPoems, poemsUpdate, this.httpOptions).subscribe();
+  }
+
+  getVersion() {
+    return this.http.get(this.urlVersion);
+  }
+
+  updateVersion(version) {
+    this.http.put(this.urlVersion, version, this.httpOptions).subscribe();
   }
 
 }

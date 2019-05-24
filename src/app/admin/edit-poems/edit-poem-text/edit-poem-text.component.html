@@ -1,0 +1,27 @@
+<div class="poems-text">
+  <ul class="list-group">
+    <li *ngIf="!isEdit" class="list-group-item list-item-form">
+      <form [formGroup]='selectAutor'>
+        <select class="form-control" formControlName='autor'>
+          <option *ngFor="let item of dataPoems; let i = index" value="{{item.name}}">{{item.name}}</option>
+        </select>
+      </form>
+    </li>
+  </ul>
+
+  <ul *ngIf="isSelected && !isEdit" class="list-group">
+    <li (click)="edit(i)" *ngFor="let item of dataPoems[pointer].poems; let i = index"
+      class="list-group-item">{{item.poemName}}
+      <i class="fas fa-edit"></i></li>
+  </ul>
+
+  <ul *ngIf="isEdit" class="list-group">
+    <li class="list-group-item list-item-form">
+      <form (submit)="successEdit()" [formGroup]="textArea" class="form-group">
+        <textarea type='text' formControlName="text" rows="5" wrap="soft"></textarea>
+        <button type="submit" class="btn btn-form btn-success"><i class="fas fa-check"></i></button>
+        <button (click)="cancel()" type="button" class="btn btn-form btn-danger"><i class="fas fa-times"></i></button>
+      </form>
+    </li>
+  </ul>
+</div>

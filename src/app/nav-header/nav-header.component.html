@@ -11,13 +11,29 @@
     </div>
   </div>
 </nav>
-
-<!-- <div *ngIf="isAdmin" class="btn-group-vertical" role="group" aria-label="Basic example">
-  <button *ngFor="let item of adminHeaderLinks" routerLinkActive="active" type="button" class="btn btn-secondary" routerLink='{{item.link}}'>{{item.name}}</button>
-  <button type="button" class="btn btn-secondary" (click)="exit()">Выход</button>
-</div> -->
 <ul *ngIf="isAdmin" class="list-group">
   <li *ngFor="let item of adminHeaderLinks" class="list-group-item bg-dark"><a routerLinkActive="active" class="nav-item nav-link" routerLink='{{item.link}}'>{{item.name}}</a></li>
   <li class="list-group-item bg-dark"><a (click)="exit()" class="nav-item nav-link" routerLink=''>Выйти</a></li>
 </ul>
+<div *ngIf="isPoems">
+  <div class="btn-group full-scrin" role="group" aria-label="Basic example">
+    <button type="button" routerLink="/admin/edit_poems/edit_autor_name" class="btn btn-secondary">Автор</button>
+    <button type="button" router routerLink="/admin/edit_poems/edit_poem_name" class="btn btn-secondary">Название</button>
+    <button type="button" routerLink="/admin/edit_poems/edit_poem_text" class="btn btn-secondary">Стих</button>
+    <button type="button" routerLink="/admin/edit_poems/add_new_poem" class="btn btn-secondary">Добавить</button>
+  </div>
+  
+  <div class="btn-group for-mobi" role="group">
+    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      Открыть
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" routrLinkActive='active' routerLink="/admin/edit_poems/edit_autor_name">Автор</a>
+      <a class="dropdown-item" routerLink="/admin/edit_poems/edit_poem_name">Название</a>
+      <a class="dropdown-item" routerLink="/admin/edit_poems/edit_poem_text">Стих</a>
+      <a class="dropdown-item" routerLink="/admin/edit_poems/add_new_poem">Добавить</a>
+    </div>
+  </div>
+</div>
 

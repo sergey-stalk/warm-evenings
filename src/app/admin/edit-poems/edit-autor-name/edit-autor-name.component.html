@@ -1,0 +1,15 @@
+<div class="autor">
+  <ul *ngIf="!isEdit" class="list-group">
+    <li (click)="editAutor(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}
+      <i class="fas fa-edit"></i></li>
+  </ul>
+  <ul *ngIf="isEdit" class="list-group">
+    <li class="list-group-item list-item-form">
+      <form [formGroup]="autor" class="form-group" (submit)='successEditAutor()'>
+        <input type="text" class="form-control" formControlName="autorName">
+        <button type="submit" class="btn btn-form btn-success"><i class="fas fa-check"></i></button>
+        <button (click)="cancel()" type="button" class="btn btn-form btn-danger"><i class="fas fa-times"></i></button>
+      </form>
+    </li>
+  </ul>
+</div>

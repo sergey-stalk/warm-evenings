@@ -24,3 +24,16 @@ img {
 li.active {
   background: -20%;
 }
+
+.for-mobi {
+  display: none;
+}
+
+@media  (max-width: 453px) {
+  .for-mobi {
+    display: block;
+  }
+  .full-scrin {
+    display: none;
+  }
+}

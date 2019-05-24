@@ -1,3 +1,4 @@
+import { CatchDataService } from './../../services/catch-data.service';
 import { ApiDataService } from './../../services/api-data.service';
 
 import { FormGroup, FormControl } from '@angular/forms';
@@ -10,48 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService) { }
+  constructor(private apiDataService: ApiDataService, private catchDataService: CatchDataService) { }
 
   switcher: FormGroup;
-  settings: any;
-  state = '';
-  btnState = '';
+  settings;
 
   ngOnInit() {
+    this.switcher = new FormGroup({
+      telegramSettings: new FormControl()
+    });
+
     if (localStorage.settings) {
-      this.settings = JSON.parse(localStorage.settings);
-      if (this.settings.telegram) {
-          this.state = 'Включен';
-          this.btnState = 'Отключить';
-        } else {
-          this.state = 'Отключен';
-          this.btnState = 'Включить';
-        }
+      this.settings = this.catchDataService.getCatchItem('settings');
+      this.switcher.setValue(this.settings);
     } else {
       this.apiDataService.getSettings().subscribe((settings) => {
         this.settings = settings;
-        localStorage.setItem('settings', JSON.stringify(settings));
-        if (this.settings.telegram) {
-          this.state = 'Включен';
-          this.btnState = 'Отключить';
-        } else {
-          this.state = 'Отключен';
-          this.btnState = 'Включить';
-        }
+        this.catchDataService.updateCatch('settings', this.settings);
+        this.switcher.setValue(this.settings);
       });
     }
-  }
 
-  chengeState() {
-    this.settings.telegram = !this.settings.telegram;
-    if (this.settings.telegram) {
-      this.state = 'Включен';
-      this.btnState = 'Отключить';
-    } else {
-      this.state = 'Отключен';
-      this.btnState = 'Включить';
-    }
-    localStorage.settings = JSON.stringify(this.settings);
-    this.apiDataService.setSettings(this.settings);
+    this.switcher.valueChanges.subscribe((changes) => {
+      this.catchDataService.updateCatch('settings', changes);
+      this.apiDataService.setSettings(changes);
+      this.settings = changes;
+    });
+
   }
 }

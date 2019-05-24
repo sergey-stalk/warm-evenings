@@ -1,18 +1,18 @@
-<div *ngIf="data.length < 1" id="preloader">
+<div *ngIf="!meetingData" id="preloader">
   <div id="loader"></div>
 </div>
 
 <ul class="list-group">
-  <li id="{{i}}" class="list-group-item" *ngFor="let item of data; let i = index">
+  <li id="{{i}}" class="list-group-item" *ngFor="let item of meetingData; let i = index">
     {{item.text}} <br>
     {{item.date |date}} | 
     <b>{{item.autor}}</b> 
     <i (click)="delete(i)" class="fas fa-times"></i></li>
 
-    <li (click)="writeNewData()" *ngIf="dataWriten" class="btn-list-item list-group-item"><button *ngIf="settings" class="btn btn-success">Добавить встречу</button></li>
+    <li (click)="writeNewData()" *ngIf="dataWriten" class="btn-list-item list-group-item"><button *ngIf="meetingData" class="btn btn-success">Добавить встречу</button></li>
 
     <li *ngIf="!dataWriten" class="list-group-item">
-      <form [formGroup]="form" (ngSubmit)="addData()">
+      <form [formGroup]="form" (ngSubmit)="addNewData()">
         <input type="text" placeholder="autor" class="form-control" formControlName="autor">
         <input type="date" placeholder="date" class="form-control" formControlName="date">
         <input type="text" placeholder="text" class="form-control" formControlName="text">

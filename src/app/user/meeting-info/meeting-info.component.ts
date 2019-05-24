@@ -1,4 +1,5 @@
 import { ApiDataService } from './../../services/api-data.service';
+import { CatchDataService } from './../../services/catch-data.service';
 
 import { Component, OnInit } from '@angular/core';
 
@@ -10,21 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MeetingInfoComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService) { }
-  data: any = [];
+  constructor(private catchDataService: CatchDataService, private apiDataService: ApiDataService) { }
+  meetingData;
 
   ngOnInit() {
     if (localStorage.meeting) {
-      this.data = JSON.parse(localStorage.meeting);
-      this.data.reverse();
+      this.meetingData = this.catchDataService.getCatchItem('meeting');
+      this.meetingData.reverse();
     } else {
-      this.apiDataService.getApiData().subscribe((res) => {
-        this.data = res;
-        localStorage.setItem('meeting', JSON.stringify(this.data));
-        this.data.reverse();
+      this.apiDataService.getMeetingData().subscribe((meeting) => {
+        this.catchDataService.updateCatch('meeting', meeting);
+        this.meetingData = meeting;
+        this.meetingData.reverse();
       });
     }
   }
-
-
 }

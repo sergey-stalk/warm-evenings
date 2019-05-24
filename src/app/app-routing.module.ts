@@ -9,7 +9,10 @@ import { AboutComponent } from './user/about/about.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PoemsEditComponent } from './admin/poems-edit/poems-edit.component';
+import { EditAutorNameComponent } from './admin/edit-poems/edit-autor-name/edit-autor-name.component';
+import { EditPoemNameComponent } from './admin/edit-poems/edit-poem-name/edit-poem-name.component';
+import { EditPoemTextComponent } from './admin/edit-poems/edit-poem-text/edit-poem-text.component';
+import { AddNewPoemComponent } from './admin/edit-poems/add-new-poem/add-new-poem.component';
 
 
 const routes: Routes = [
@@ -20,7 +23,12 @@ const routes: Routes = [
   {path: 'admin', component: MeetingEditComponent, canActivate: [AuthGuard]},
   {path: 'admin/settings', component: SettingsComponent, canActivate: [AuthGuard]},
   {path: 'admin/message', component: MessageComponent, canActivate: [AuthGuard]},
-  {path:  'admin/poems_edit', component: PoemsEditComponent, canActivate: [AuthGuard]}
+  {path: 'admin/edit_poems/edit_autor_name', component: EditAutorNameComponent, canActivate: [AuthGuard]},
+  {path: 'admin/edit_poems/edit_poem_name', component: EditPoemNameComponent, canActivate: [AuthGuard]},
+  {path: 'admin/edit_poems/edit_poem_text', component: EditPoemTextComponent, canActivate: [AuthGuard]},
+  {path: 'admin/edit_poems/add_new_poem', component: AddNewPoemComponent, canActivate: [AuthGuard]},
+
+
 
 ];
 

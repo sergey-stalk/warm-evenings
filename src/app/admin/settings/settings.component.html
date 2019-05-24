@@ -3,8 +3,8 @@
 </div>
 
 <div *ngIf="settings" class="settings">
-  <div class="item">
-    <p> Телеграм бот {{state}}</p>
-    <button (click)="chengeState()" class="btn btn-success">{{btnState}}</button>
-  </div>
+  <form [formGroup]='switcher' class="custom-control custom-switch">
+    <input formControlName="telegramSettings" type="checkbox" class="custom-control-input" id="customSwitch1">
+    <label class="custom-control-label" for="customSwitch1">Телеграм бот</label>
+  </form>
 </div>
