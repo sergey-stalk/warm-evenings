@@ -1,7 +1,3 @@
-.list-group-item{
-  cursor: pointer;
-}
-
 .list-item-form {
   padding: 0;
   margin: 0;
@@ -9,6 +5,10 @@
   margin-top: 10px;
 }
 
-.list-group-item{
-  cursor: pointer;
+.alert {
+  margin-bottom: 0;
+}
+
+.btn-list-item {
+  padding: 0;
 }

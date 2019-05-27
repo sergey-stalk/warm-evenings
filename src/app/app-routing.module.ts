@@ -1,3 +1,4 @@
+import { RemovePoemComponent } from './admin/edit-poems/remove-poem/remove-poem.component';
 import { ShowPoemsComponent } from './user/show-poems/show-poems.component';
 import { SettingsComponent } from './admin/settings/settings.component';
 import { MeetingEditComponent } from './admin/meeting-edit/meeting-edit.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'admin/edit_poems/edit_poem_name', component: EditPoemNameComponent, canActivate: [AuthGuard]},
   {path: 'admin/edit_poems/edit_poem_text', component: EditPoemTextComponent, canActivate: [AuthGuard]},
   {path: 'admin/edit_poems/add_new_poem', component: AddNewPoemComponent, canActivate: [AuthGuard]},
+  {path: 'admin/edit_poems/remove_poem', component: RemovePoemComponent, canActivate: [AuthGuard]},
 
 
 

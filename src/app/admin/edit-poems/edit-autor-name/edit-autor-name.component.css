@@ -2,17 +2,9 @@
   cursor: pointer;
 }
 
-.btn-danger {
-  float: right;
-}
-
 .list-item-form {
   padding: 0;
   margin: 0;
   border: none !important;
-  margin-top: 10px;
-}
-
-.btn-form {
   margin-top: 10px;
 }

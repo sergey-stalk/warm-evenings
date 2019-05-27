@@ -10,9 +10,14 @@
   </ul>
 
   <ul *ngIf="isSelected && !isEdit" class="list-group">
-    <li (click)="edit(i)" *ngFor="let item of dataPoems[pointer].poems; let i = index"
-      class="list-group-item">{{item.poemName}}
+    <li (click)="edit(i)" *ngFor="let item of dataPoems[pointer].poems; let i = index" class="list-group-item">
+      {{item.poemName}}
       <i class="fas fa-edit"></i></li>
+    <li *ngIf="newAutorName" class="list-group-item list-item-form">
+      <div class="alert alert-danger" role="alert">
+        У данного автора нет ни одного стиха
+      </div>
+    </li>
   </ul>
 
   <ul *ngIf="isEdit" class="list-group">

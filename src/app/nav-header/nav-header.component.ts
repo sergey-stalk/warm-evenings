@@ -31,7 +31,7 @@ export class NavHeaderComponent implements OnInit {
     {name: 'Встречи', link: '/admin'},
     {name: 'Настройки', link: '/admin/settings'},
     {name: 'Сообщения', link: '/admin/message'},
-    {name: 'Стихи', link: 'admin/edit_poems/edit_autor_name'}
+    {name: 'Стихи', link: 'admin/edit_poems/edit_autor_name'},
   ];
 
   ngOnInit() {

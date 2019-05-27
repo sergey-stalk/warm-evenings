@@ -5,10 +5,12 @@
   </ul>
   <ul *ngIf="isEdit" class="list-group">
     <li class="list-group-item list-item-form">
-      <form [formGroup]="autor" class="form-group" (submit)='successEditAutor()'>
+      <form [formGroup]="autor" class="input-group mb-3" (submit)='successEditAutor()'>
         <input type="text" class="form-control" formControlName="autorName">
-        <button type="submit" class="btn btn-form btn-success"><i class="fas fa-check"></i></button>
-        <button (click)="cancel()" type="button" class="btn btn-form btn-danger"><i class="fas fa-times"></i></button>
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+          <button (click)="cancel()" type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+        </div>
       </form>
     </li>
   </ul>

@@ -28,8 +28,11 @@ li.active {
 .for-mobi {
   display: none;
 }
+.full-scrin {
+  display: inline-block;
+}
 
-@media  (max-width: 453px) {
+@media  (max-width: 768px) {
   .for-mobi {
     display: block;
   }

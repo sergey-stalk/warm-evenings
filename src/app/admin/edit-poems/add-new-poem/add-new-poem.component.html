@@ -1,3 +1,35 @@
-<p>
-  add-new-poem works!
-</p>
+<ul *ngIf="!isAddPoems" class="list-group">
+  <li *ngIf="comparisonName" class="list-item-form list-group-item">
+    <div class="alert alert-danger" role="alert">
+      Ошибка: Такой автор уже существует
+    </div>
+  </li>
+  <li *ngIf="!isAddAutor && dataPoems && !isAddPoem" class="btn-list-item list-group-item"><button (click)="addingAutor()"
+      class="btn btn-success">Добавить автора</button></li>
+  <li *ngIf="isAddAutor" class="list-item-form list-group-item">
+    <form (submit)="addAutorName()" [formGroup]="addAutorForm" class="input-group mb-3">
+      <input formControlName="autorName" type="text" class="form-control" placeholder="Добавить имя автора"
+        aria-label="Recipient's username" aria-describedby="button-addon1">
+      <div class="input-group-append">
+        <button class="btn btn-outline-success" type="submit" id="button-addon1"><i class="fas fa-check"></i></button>
+        <button (click)="cancel()" class="btn btn-outline-danger" type="button" id="button-addon1"><i
+            class="fas fa-times"></i></button>
+      </div>
+    </form>
+  </li>
+  <li (click)="addingPoem(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}</li>
+</ul>
+
+<ul *ngIf="isAddPoems" class="list-group">
+  <li class="list-item-form list-group-item">
+    <form [formGroup]="addPoemForm" (submit)='addPoem()' class="form-group">
+      <input formControlName="poemName" type="text" class="form-control" placeholder="Название стиха"
+         aria-describedby="button-addon1">
+      <br>
+      <textarea type='text' formControlName="poemText" rows="5" wrap="soft" placeholder="Текст стиха"></textarea>
+      <button class="btn btn-outline-success" type="submit" id="button-addon1"><i class="fas fa-check"></i></button>
+      <button (click)="cancel()" class="btn btn-outline-danger" type="button" id="button-addon1"><i
+          class="fas fa-times"></i></button>
+    </form>
+  </li>
+</ul>

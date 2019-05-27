@@ -19,6 +19,7 @@ export class EditPoemTextComponent implements OnInit {
   textArea: FormGroup;
   isSelected = false;
   isEdit = false;
+  newAutorName;
 
   ngOnInit() {
     if (localStorage.poems) {
@@ -41,6 +42,11 @@ export class EditPoemTextComponent implements OnInit {
         }
       });
       this.isSelected = true;
+      if (this.dataPoems[this.pointer].poems.length === 0) {
+        this.newAutorName = true;
+      } else {
+        this.newAutorName = false;
+      }
     });
 
   }

@@ -10,17 +10,25 @@
   </ul>
 
   <ul *ngIf="isSelected && !isEdit" class="list-group">
-    <li (click)="edit(i)" *ngFor="let item of dataPoems[pointer].poems; let i = index"
-      class="list-group-item">{{item.poemName}}
+    <li (click)="edit(i)" *ngFor="let item of dataPoems[pointer].poems; let i = index" class="list-group-item">
+      {{item.poemName}}
       <i class="fas fa-edit"></i></li>
+    <li *ngIf="newAutorName" class="list-group-item list-item-form">
+      <div class="alert alert-danger" role="alert">
+        У данного автора нет ни одного стиха
+      </div>
+    </li>
   </ul>
 
   <ul *ngIf="isEdit" class="list-group">
     <li class="list-group-item list-item-form">
-      <form (submit)="successEdit()" [formGroup]="form" class="form-group">
-        <input type="text" class="form-control" formControlName="poemName">
-        <button type="submit" class="btn btn-form btn-success"><i class="fas fa-check"></i></button>
-        <button (click)="cancel()" type="button" class="btn btn-form btn-danger"><i class="fas fa-times"></i></button>
+      <form (submit)="successEdit()" [formGroup]="form" class="input-group mb-3">
+        <input formControlName="poemName" type="text" class="form-control"
+          aria-label="Recipient's username" aria-describedby="button-addon1">
+        <div class="input-group-append">
+          <button type="submit" class="btn btn-outline-success"><i class="fas fa-check"></i></button>
+          <button (click)="cancel()" type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+        </div>
       </form>
     </li>
   </ul>
