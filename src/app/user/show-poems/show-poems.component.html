@@ -11,11 +11,23 @@
 
 <div *ngIf="dataPoems" class="wrapper">
   <ul class="list-group" *ngIf="scrin === 'autor'">
-    <li (click)="showPoemsList(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}</li>
+    <li class="list-group-item list-item-form">
+      <form [formGroup]="searchAutor" class="input-group mb-3 search">
+        <input type="text" class="form-control" formControlName="autor">
+      </form>
+    </li>
+    <li (click)="showPoemsList(item.name)" *ngFor="let item of dataView" class="list-group-item">{{item.name}}
+    </li>
   </ul>
 
   <ul class="list-group" *ngIf="scrin === 'poemsList'">
-    <li (click)="showPoem(i)" *ngFor="let poems of dataPoems[history[0]].poems; let i = index" class="list-group-item">{{poems.poemName}}</li>
+    <li class="list-group-item list-item-form">
+      <form [formGroup]="searchPoem" class="input-group mb-3 search">
+        <input type="text" class="form-control" formControlName="poem">
+      </form>
+    </li>
+    <li (click)="showPoem(poems.poemName)" *ngFor="let poems of dataView[history[0]].poems; let i = index" class="list-group-item">
+      {{poems.poemName}}</li>
   </ul>
 
   <div *ngIf="scrin === 'poem'" class="poem">

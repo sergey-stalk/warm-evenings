@@ -1,6 +1,15 @@
-<div class="autor">
+<div *ngIf="!dataPoems" id="preloader">
+  <div id="loader"></div>
+</div>
+
+<div *ngIf="dataPoems" class="autor">
   <ul *ngIf="!isEdit" class="list-group">
-    <li (click)="editAutor(i)" *ngFor="let item of dataPoems; let i = index" class="list-group-item">{{item.name}}
+    <li class="list-group-item list-item-form">
+      <form [formGroup]="searchForm" class="input-group mb-3 search">
+        <input type="text" class="form-control" formControlName="search">
+      </form>
+    </li>
+    <li (click)="editAutor(item.name)" *ngFor="let item of dataView" class="list-group-item">{{item.name}}
       <i class="fas fa-edit"></i></li>
   </ul>
   <ul *ngIf="isEdit" class="list-group">

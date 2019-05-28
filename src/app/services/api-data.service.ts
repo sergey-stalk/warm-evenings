@@ -1,3 +1,4 @@
+import { CatchDataService } from './catch-data.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -6,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class ApiDataService {
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private catchDataService: CatchDataService) { }
   httpOptions = {
       headers: new HttpHeaders({
       'Content-Type':  'application/json; charset=utf-8',
@@ -37,6 +38,25 @@ constructor(private http: HttpClient) { }
   }
 
   updatePoems(poemsUpdate) {
+    poemsUpdate.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+    });
+    poemsUpdate.map((el) => {
+      return el.poems.sort((x, y) => {
+        if (x.poemName < y.poemName) {
+          return -1;
+        }
+        if (x.poemName > y.poemName) {
+          return 1;
+        }
+      });
+    });
+    this.catchDataService.updateCatch('poems', poemsUpdate);
     this.http.put(this.urlPoems, poemsUpdate, this.httpOptions).subscribe();
   }
 

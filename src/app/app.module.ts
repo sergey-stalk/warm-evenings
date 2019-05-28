@@ -23,6 +23,8 @@ import { ShowPoemsComponent } from './user/show-poems/show-poems.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { CheckAuthService } from './services/check-auth.service';
 import { RemovePoemComponent } from './admin/edit-poems/remove-poem/remove-poem.component';
+import { SearchAutorService } from './services/search-autor.service';
+import { SearchPoemService } from './services/search-poem.service';
 
 
 @NgModule({
@@ -54,6 +56,8 @@ import { RemovePoemComponent } from './admin/edit-poems/remove-poem/remove-poem.
       AuthGuard,
       TelegramAlertService,
       CatchDataService,
+      SearchAutorService,
+      SearchPoemService
    ],
    bootstrap: [
       AppComponent

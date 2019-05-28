@@ -14,6 +14,9 @@ export class RemovePoemComponent implements OnInit {
 
   dataPoems;
   selectAutor: FormGroup;
+  selectPoem: FormGroup;
+  isSelectedAutor = false;
+  pointer;
 
   ngOnInit() {
     if (localStorage.poems) {
@@ -25,8 +28,24 @@ export class RemovePoemComponent implements OnInit {
       });
     }
 
+    this.selectPoem = new FormGroup({
+      autor: new FormControl('', Validators.required),
+      poemName: new FormControl('', Validators.required)
+    });
+
+
+    this.selectPoem.valueChanges.subscribe((changes) => {
+      this.dataPoems.map((el, i) => {
+        if (el.name === changes.autor) {
+          this.pointer = i;
+        }
+      });
+      this.isSelectedAutor = true;
+
+    });
+
     this.selectAutor = new FormGroup({
-      autorName: new FormControl('')
+      autorName: new FormControl('', Validators.required)
     });
   }
 
@@ -36,9 +55,18 @@ export class RemovePoemComponent implements OnInit {
         return el;
       }
     });
-    this.catchDataService.updateCatch('poems', this.dataPoems);
     this.apiDataService.updatePoems(this.dataPoems);
     this.selectAutor.reset();
   }
 
+  removePoem() {
+    this.dataPoems[this.pointer].poems = this.dataPoems[this.pointer].poems.filter((el) => {
+      if (this.selectPoem.value.poemName !== el.poemName) {
+        return el;
+      }
+    });
+    this.apiDataService.updatePoems(this.dataPoems);
+    this.selectPoem.reset();
+    this.isSelectedAutor = false;
+  }
 }

@@ -1,3 +1,5 @@
+import { SearchAutorService } from './../../../services/search-autor.service';
+import { SearchPoemService } from './../../../services/search-poem.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CatchDataService } from './../../../services/catch-data.service';
 import { ApiDataService } from './../../../services/api-data.service';
@@ -10,22 +12,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNewPoemComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService, private catchDataService: CatchDataService) { }
+  constructor(
+    private apiDataService: ApiDataService,
+    private catchDataService: CatchDataService,
+    private searchAutorService: SearchAutorService
+  ) { }
 
   dataPoems;
   addAutorForm: FormGroup;
   addPoemForm: FormGroup;
+  searchAutor: FormGroup;
   comparisonName = false;
   isAddAutor = false;
   isAddPoems = false;
   pointer;
+  dataView;
 
   ngOnInit() {
     if (localStorage.poems) {
       this.dataPoems = this.catchDataService.getCatchItem('poems');
+      this.dataView = this.catchDataService.getCatchItem('poems');
     } else {
       this.apiDataService.getPoems().subscribe((poems) => {
         this.dataPoems = poems;
+        this.dataView = poems;
         this.catchDataService.updateCatch('poems', poems);
       });
     }
@@ -37,6 +47,13 @@ export class AddNewPoemComponent implements OnInit {
     this.addPoemForm = new FormGroup({
       poemName: new FormControl('', Validators.required),
       poemText: new FormControl('', Validators.required)
+    });
+
+    this.searchAutor = new FormGroup({
+      autor: new FormControl()
+    });
+    this.searchAutor.valueChanges.subscribe((changes) => {
+      this.dataView = this.searchAutorService.sortByAutorName(changes.autor);
     });
   }
 
@@ -50,25 +67,29 @@ export class AddNewPoemComponent implements OnInit {
   addAutorName() {
     this.comparisonName = this.comparison();
     if (!this.comparisonName) {
-      this.dataPoems.push({name: this.addAutorForm.value.autorName, poems: []});
-      this.catchDataService.updateCatch('poems', this.dataPoems);
+      this.dataPoems.push({ name: this.addAutorForm.value.autorName, poems: [] });
       this.apiDataService.updatePoems(this.dataPoems);
     }
     this.addAutorForm.reset();
     this.addingAutor();
+    this.dataView = this.searchAutorService.sortByAutorName('');
+    this.searchAutor.setValue({autor: ''});
   }
 
   addPoem() {
-    this.dataPoems[this.pointer].poems.push({poemName: this.addPoemForm.value.poemName, poem: this.addPoemForm.value.poemText});
-    this.catchDataService.updateCatch('poems', this.dataPoems);
+    this.dataPoems[this.pointer].poems.push({ poemName: this.addPoemForm.value.poemName, poem: this.addPoemForm.value.poemText });
     this.apiDataService.updatePoems(this.dataPoems);
     this.addPoemForm.reset();
     this.isAddPoems = !this.isAddPoems;
   }
 
-  addingPoem(i) {
+  addingPoem(item) {
     this.isAddPoems = !this.isAddPoems;
-    this.pointer = i;
+    this.dataPoems.map((el, i) => {
+      if (el.name === item) {
+        this.pointer = i;
+      }
+    });
   }
 
   addingAutor() {

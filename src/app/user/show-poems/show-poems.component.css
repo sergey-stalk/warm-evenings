@@ -16,3 +16,14 @@ nav ol {
   white-space: pre-wrap;
   text-align: center;
 }
+
+.list-item-form {
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  margin-top: 10px;
+}
+
+.search {
+  margin-bottom: 10px !important;
+}

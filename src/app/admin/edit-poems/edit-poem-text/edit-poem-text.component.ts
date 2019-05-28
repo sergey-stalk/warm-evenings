@@ -1,3 +1,4 @@
+import { SearchPoemService } from './../../../services/search-poem.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CatchDataService } from './../../../services/catch-data.service';
 import { ApiDataService } from 'src/app/services/api-data.service';
@@ -10,23 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditPoemTextComponent implements OnInit {
 
-  constructor(private apiDataService: ApiDataService, private catchDataService: CatchDataService) { }
+  constructor(
+    private apiDataService: ApiDataService,
+    private catchDataService: CatchDataService,
+    private searchPoemService: SearchPoemService
+  ) { }
 
   dataPoems;
   pointer;
   index;
   selectAutor: FormGroup;
   textArea: FormGroup;
+  searchPoem: FormGroup;
   isSelected = false;
   isEdit = false;
   newAutorName;
+  dataView;
 
   ngOnInit() {
     if (localStorage.poems) {
       this.dataPoems = this.catchDataService.getCatchItem('poems');
+      this.dataView = this.catchDataService.getCatchItem('poems');
     } else {
       this.apiDataService.getPoems().subscribe((poems) => {
         this.dataPoems = poems;
+        this.dataView = poems;
         this.catchDataService.updateCatch('poems', poems);
       });
     }
@@ -49,12 +58,24 @@ export class EditPoemTextComponent implements OnInit {
       }
     });
 
+    this.searchPoem = new FormGroup({
+      poem: new FormControl()
+    });
+
+    this.searchPoem.valueChanges.subscribe((changes) => {
+      this.dataView = this.searchPoemService.searchByPoemName(changes.poem, this.pointer);
+    });
+
   }
 
-  edit(index) {
-    this.index = index;
+  edit(item) {
+    this.dataPoems[this.pointer].poems.map((el, i) => {
+      if (el.poemName === item) {
+        this.index = i;
+      }
+    });
     this.textArea = new FormGroup({
-      text: new FormControl(this.dataPoems[this.pointer].poems[index].poem)
+      text: new FormControl(this.dataPoems[this.pointer].poems[this.index].poem)
     });
     this.isEdit = true;
   }
@@ -64,8 +85,9 @@ export class EditPoemTextComponent implements OnInit {
       this.cancel();
     } else {
       this.dataPoems[this.pointer].poems[this.index].poem = this.textArea.value.text;
-      this.catchDataService.updateCatch('poems', this.dataPoems);
       this.apiDataService.updatePoems(this.dataPoems);
+      this.dataView = this.searchPoemService.searchByPoemName('', this.index);
+      this.searchPoem.setValue({poem: ''});
     }
     this.cancel();
   }
