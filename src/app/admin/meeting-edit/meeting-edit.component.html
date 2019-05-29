@@ -2,22 +2,39 @@
   <div id="loader"></div>
 </div>
 
-<ul class="list-group">
+<ul *ngIf="!isEditMeeting" class="list-group">
   <li id="{{i}}" class="list-group-item" *ngFor="let item of meetingData; let i = index">
-    {{item.text}} <br>
-    {{item.date |date}} | 
-    <b>{{item.autor}}</b> 
-    <i (click)="delete(i)" class="fas fa-times"></i></li>
+    <div class="content">
+      {{item.text}} <br>
+      {{item.date |date}} |
+      <b>{{item.autor}}</b></div>
+    <div class="controls">
+      <i (click)="edit(i)" class="far fa-edit"></i>
+      <i (click)="delete(i)" class="fas fa-times"></i>
+    </div>
+  </li>
+</ul>
+<ul class="list-group">
+  <li (click)="writeNewData()" *ngIf="dataWriten && !isEditMeeting" class="btn-list-item list-group-item"><button *ngIf="meetingData"
+      class="btn btn-success">Добавить встречу</button></li>
 
-    <li (click)="writeNewData()" *ngIf="dataWriten" class="btn-list-item list-group-item"><button *ngIf="meetingData" class="btn btn-success">Добавить встречу</button></li>
+  <li *ngIf="!dataWriten && !isEditMeeting" class="list-group-item">
+    <form [formGroup]="form" (ngSubmit)="addNewData()">
+      <input type="text" placeholder="autor" class="form-control" formControlName="autor">
+      <input type="date" placeholder="date" class="form-control" formControlName="date">
+      <input type="text" placeholder="text" class="form-control" formControlName="text">
+      <button type="submit" class="btn btn-primary" [disabled]='form.invalid'>Сохранить</button>
+      <button (click)="writeNewData()" class="btn btn-danger">Отмена</button>
+    </form>
+  </li>
 
-    <li *ngIf="!dataWriten" class="list-group-item">
-      <form [formGroup]="form" (ngSubmit)="addNewData()">
-        <input type="text" placeholder="autor" class="form-control" formControlName="autor">
-        <input type="date" placeholder="date" class="form-control" formControlName="date">
-        <input type="text" placeholder="text" class="form-control" formControlName="text">
-        <button type="submit" class="btn btn-primary" [disabled]='form.invalid'>Сохранить</button>
-        <button (click)="writeNewData()" class="btn btn-danger">Отмена</button>
-      </form>
-    </li>
+  <li *ngIf="isEditMeeting" class="list-group-item">
+    <form [formGroup]="editMeetingForm" (ngSubmit)="successEdit()">
+      <input type="text" class="form-control" formControlName="autor">
+      <input type="date" class="form-control" formControlName="date">
+      <input type="text" class="form-control" formControlName="text">
+      <button type="submit" class="btn btn-primary">Сохранить</button>
+      <button (click)="cancel()" class="btn btn-danger">Отмена</button>
+    </form>
+  </li>
 </ul>

@@ -48,14 +48,14 @@ export class EditPoemTextComponent implements OnInit {
       this.dataPoems.map((element, index) => {
         if (element.name === changes.autor) {
           this.pointer = index;
+          this.isSelected = true;
+          if (this.dataPoems[this.pointer].poems.length === 0) {
+            this.newAutorName = true;
+          } else {
+            this.newAutorName = false;
+          }
         }
       });
-      this.isSelected = true;
-      if (this.dataPoems[this.pointer].poems.length === 0) {
-        this.newAutorName = true;
-      } else {
-        this.newAutorName = false;
-      }
     });
 
     this.searchPoem = new FormGroup({
@@ -87,7 +87,7 @@ export class EditPoemTextComponent implements OnInit {
       this.dataPoems[this.pointer].poems[this.index].poem = this.textArea.value.text;
       this.apiDataService.updatePoems(this.dataPoems);
       this.dataView = this.searchPoemService.searchByPoemName('', this.index);
-      this.searchPoem.setValue({poem: ''});
+      this.searchPoem.setValue({ poem: '' });
     }
     this.cancel();
   }

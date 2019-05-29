@@ -6,9 +6,10 @@
   <ul class="list-group">
     <li *ngIf="!isEdit" class="list-group-item list-item-form">
       <form [formGroup]='selectAutor'>
-        <select class="form-control" formControlName='autor'>
+        <input type="text" formControlName='autor' class="form-control" list="poemText">
+        <datalist id="poemText">
           <option *ngFor="let item of dataPoems; let i = index" value="{{item.name}}">{{item.name}}</option>
-        </select>
+        </datalist>
       </form>
     </li>
   </ul>

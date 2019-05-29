@@ -38,10 +38,9 @@ export class RemovePoemComponent implements OnInit {
       this.dataPoems.map((el, i) => {
         if (el.name === changes.autor) {
           this.pointer = i;
+          this.isSelectedAutor = true;
         }
       });
-      this.isSelectedAutor = true;
-
     });
 
     this.selectAutor = new FormGroup({

@@ -7,9 +7,10 @@
     <li class="list-item-form list-group-item">
       <label for="autor">Удаление автора</label>
       <form [formGroup]='selectAutor' class="input-group mb-3" (submit)="removeAutorName()">
-        <select formControlName="autorName" class="form-control" id="autor">
+        <input type="text" formControlName='autorName' class="form-control" list="removeAutor">
+        <datalist id="removeAutor">
           <option *ngFor="let item of dataPoems" value="{{item.name}}">{{item.name}}</option>
-        </select>
+        </datalist>
         <div class="input-group-append">
           <button class="btn btn-outline-danger" type="submit" id="button-addon1">Удалить</button>
         </div>
@@ -18,12 +19,22 @@
     <li class="list-item-form list-group-item">
       <label for="autor">Удаление стиха</label>
       <form [formGroup]='selectPoem' class="input-group mb-3" (submit)="removePoem()">
-        <select formControlName="autor" class="form-control" id="autor">
+        <input type="text" formControlName='autor' class="form-control" list="autorName">
+        <datalist id="autorName">
           <option *ngFor="let item of dataPoems" value="{{item.name}}">{{item.name}}</option>
-        </select>
-        <select *ngIf="isSelectedAutor" formControlName="poemName" class="form-control" id="autor">
+        </datalist>
+
+        <div *ngIf="isSelectedAutor">
+          <input type="text" formControlName='poemName' class="form-control" list="poemName">
+          <datalist id="poemName">
+            <option *ngFor="let item of dataPoems[pointer].poems" value="{{item.poemName}}">{{item.poemName}}</option>
+          </datalist>
+        </div>
+
+
+        <!-- <select *ngIf="isSelectedAutor" formControlName="poemName" class="form-control" id="autor">
           <option *ngFor="let item of dataPoems[pointer].poems" value="{{item.poemName}}">{{item.poemName}}</option>
-        </select>
+        </select> -->
         <div class="input-group-append">
           <button class="btn btn-outline-danger" type="submit" id="button-addon1">Удалить</button>
         </div>

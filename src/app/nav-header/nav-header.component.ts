@@ -33,6 +33,12 @@ export class NavHeaderComponent implements OnInit {
     {name: 'Сообщения', link: '/admin/message'},
     {name: 'Стихи', link: 'admin/edit_poems/edit_autor_name'},
   ];
+  adminMobileHeaderLinks = [
+    {name: '<i class="fas fa-users"></i>', link: '/admin'},
+    {name: '<i class="fas fa-cog"></i>', link: '/admin/settings'},
+    {name: '<i class="fas fa-comment-dots"></i>', link: '/admin/message'},
+    {name: '<i class="fas fa-book"></i>', link: 'admin/edit_poems/edit_autor_name'},
+  ];
 
   ngOnInit() {
     this.catchDataService.clear();
