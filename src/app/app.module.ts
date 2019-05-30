@@ -25,6 +25,7 @@ import { CheckAuthService } from './services/check-auth.service';
 import { RemovePoemComponent } from './admin/edit-poems/remove-poem/remove-poem.component';
 import { SearchAutorService } from './services/search-autor.service';
 import { SearchPoemService } from './services/search-poem.service';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -42,13 +43,14 @@ import { SearchPoemService } from './services/search-poem.service';
       EditPoemNameComponent,
       EditPoemTextComponent,
       AddNewPoemComponent,
-      RemovePoemComponent
+      RemovePoemComponent,
+      FooterComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
-      ReactiveFormsModule,
+      ReactiveFormsModule
    ],
    providers: [
       ApiDataService,

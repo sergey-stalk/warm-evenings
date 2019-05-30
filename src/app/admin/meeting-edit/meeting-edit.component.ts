@@ -37,15 +37,13 @@ export class MeetingEditComponent implements OnInit {
         this.meetingData = meeting;
         this.meetingData.reverse();
       });
-      this.apiDataService.getSettings().subscribe((settings) => {
-        this.settings = settings;
-      });
     }
 
     if (localStorage.settings) {
       this.settings = this.catchDataService.getCatchItem('settings');
     } else {
       this.apiDataService.getSettings().subscribe((settings) => {
+        this.settings = settings;
         this.catchDataService.catch('settings', settings);
       });
     }

@@ -1,5 +1,5 @@
 import { ApiDataService } from './../services/api-data.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CatchDataService } from '../services/catch-data.service';
 
@@ -50,6 +50,11 @@ export class NavHeaderComponent implements OnInit {
     if (!localStorage.poems) {
       this.apiDataService.getPoems().subscribe((poemsData) => {
         this.catchDataService.catch('poems', poemsData);
+      });
+    }
+    if (!localStorage.settings) {
+      this.apiDataService.getSettings().subscribe((settings) => {
+        this.catchDataService.catch('settings', settings);
       });
     }
 

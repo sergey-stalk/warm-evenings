@@ -21,6 +21,10 @@ img {
   border: 1px solid white;
 }
 
+.dropdown-item {
+  color: #ffffff;
+}
+
 li.active {
   background: -20%;
 }

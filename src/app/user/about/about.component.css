@@ -1,7 +1,3 @@
-.about {
-  margin-top: 20px;
-}
-
 .about h3{
   text-align: center;
 }
@@ -14,4 +10,29 @@
 .mail {
   color: blueviolet;
   display: inline-flex;
+  cursor: pointer;
+}
+
+footer {
+  position: fixed;
+  height: 50px;
+  bottom: 0;
+  width: 100%;
+  line-height: 50px;
+}
+
+.container {
+  margin-left: 0;
+  padding: 0;
+}
+
+.carousel {
+  display: flex;
+  border-top: 1px solid #ffffff;
+}
+
+.carousel-item {
+  background: url(https://cdn-st2.rtr-vesti.ru/vh/pictures/hd/194/792/5.png);
+  background-size: cover;
+  height: 500px;
 }

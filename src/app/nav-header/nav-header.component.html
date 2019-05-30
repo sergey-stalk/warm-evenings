@@ -7,7 +7,8 @@
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav bg-dark">
-      <a class="nav-item nav-link" *ngFor="let item of headerLinks" routerLink='{{item.link}}'>{{item.name}}</a>
+      <a class="nav-item nav-link" routerLinkActive="active" *ngFor="let item of headerLinks"
+        routerLink='{{item.link}}'>{{item.name}}</a>
       <a class="nav-item nav-link" *ngIf="!isAdmin" routerLink='/auth'>Войти</a>
     </div>
   </div>
@@ -15,40 +16,46 @@
 
 <div *ngIf="isAdmin" class="admin-nav">
   <ul class="list-group desktop">
-    <li *ngFor="let item of adminHeaderLinks" class="list-group-item bg-dark"><a routerLinkActive="active"
-        class="nav-item nav-link" routerLink='{{item.link}}'>{{item.name}}</a></li>
-    <li class="list-group-item bg-dark"><a (click)="exit()" class="nav-item nav-link" routerLink=''>Выйти</a></li>
+    <li *ngFor="let item of adminHeaderLinks" class="list-group-item"><a [routerLinkActiveOptions]="{exact:
+      true}" routerLinkActive="active" class="btn btn-dark nav-item nav-link"
+        routerLink='{{item.link}}'>{{item.name}}</a></li>
+    <li class="list-group-item"><a (click)="exit()" class="btn btn-dark nav-item nav-link" routerLink=''>Выйти</a></li>
   </ul>
 
   <ul class="list-group mobile">
-    <li *ngFor="let item of adminMobileHeaderLinks" class="list-group-item bg-dark"><a routerLinkActive="active"
-        class="nav-item nav-link" routerLink='{{item.link}}' [innerHTML]='item.name'></a></li>
-    <li class="list-group-item bg-dark"><a (click)="exit()" class="nav-item nav-link" routerLink=''>
+    <li *ngFor="let item of adminMobileHeaderLinks" class="list-group-item"><a [routerLinkActiveOptions]="{exact:
+      true}" routerLinkActive="active" class="btn btn-dark nav-item nav-link" routerLink='{{item.link}}'
+        routerLinkActive="active" [innerHTML]='item.name'></a></li>
+    <li class="list-group-item"><a (click)="exit()" class="btn btn-dark nav-item nav-link" routerLink=''>
         <i class="fas fa-door-open"></i></a></li>
   </ul>
 </div>
 
 <div *ngIf="isPoems">
   <div class="btn-group full-scrin" role="group" aria-label="Basic example">
-    <button type="button" routerLink="/admin/edit_poems/edit_autor_name" class="btn btn-secondary">Автор</button>
-    <button type="button" router routerLink="/admin/edit_poems/edit_poem_name"
-      class="btn btn-secondary">Название</button>
-    <button type="button" routerLink="/admin/edit_poems/edit_poem_text" class="btn btn-secondary">Стих</button>
-    <button type="button" routerLink="/admin/edit_poems/add_new_poem" class="btn btn-secondary">Добавить</button>
-    <button type="button" routerLink="/admin/edit_poems/remove_poem" class="btn btn-secondary">Удалить</button>
+    <button type="button" routerLinkActive="active" routerLink="/admin/edit_poems/edit_autor_name"
+      class="btn btn-dark">Автор</button>
+    <button type="button" routerLinkActive="active" routerLink="/admin/edit_poems/edit_poem_name"
+      class="btn btn-dark">Название</button>
+    <button type="button" routerLinkActive="active" routerLink="/admin/edit_poems/edit_poem_text"
+      class="btn btn-dark">Стих</button>
+    <button type="button" routerLinkActive="active" routerLink="/admin/edit_poems/add_new_poem"
+      class="btn btn-dark">Добавить</button>
+    <button type="button" routerLinkActive="active" routerLink="/admin/edit_poems/remove_poem"
+      class="btn btn-dark">Удалить</button>
   </div>
 
   <div class="btn-group for-mobi" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+    <button id="btnGroupDrop1" type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       Открыть
     </button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <a class="dropdown-item" routrLinkActive='active' routerLink="/admin/edit_poems/edit_autor_name">Автор</a>
-      <a class="dropdown-item" routerLink="/admin/edit_poems/edit_poem_name">Название</a>
-      <a class="dropdown-item" routerLink="/admin/edit_poems/edit_poem_text">Стих</a>
-      <a class="dropdown-item" routerLink="/admin/edit_poems/add_new_poem">Добавить</a>
-      <a class="dropdown-item" routerLink="/admin/edit_poems/remove_poem">Удалить</a>
+    <div class="dropdown-menu bg-dark" aria-labelledby="btnGroupDrop1">
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/edit_poems/edit_autor_name">Автор</a>
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/edit_poems/edit_poem_name">Название</a>
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/edit_poems/edit_poem_text">Стих</a>
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/edit_poems/add_new_poem">Добавить</a>
+      <a class="dropdown-item" routerLinkActive="active" routerLink="/admin/edit_poems/remove_poem">Удалить</a>
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@
 </ul>
 <ul class="list-group">
   <li (click)="writeNewData()" *ngIf="dataWriten && !isEditMeeting" class="btn-list-item list-group-item"><button *ngIf="meetingData"
-      class="btn btn-success">Добавить встречу</button></li>
+      class="btn-lg btn-block btn btn-success">Добавить встречу</button></li>
 
   <li *ngIf="!dataWriten && !isEditMeeting" class="list-group-item">
     <form [formGroup]="form" (ngSubmit)="addNewData()">

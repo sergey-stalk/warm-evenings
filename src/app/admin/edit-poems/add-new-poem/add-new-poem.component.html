@@ -10,7 +10,7 @@
       </div>
     </li>
     <li *ngIf="!isAddAutor && dataPoems && !isAddPoem" class="btn-list-item list-group-item"><button
-        (click)="addingAutor()" class="btn btn-success">Добавить автора</button>
+        (click)="addingAutor()" class="btn-lg btn-block btn btn-success">Добавить автора</button>
     </li>
     <li *ngIf="isAddAutor" class="list-item-form list-group-item">
       <form (submit)="addAutorName()" [formGroup]="addAutorForm" class="input-group mb-3">
