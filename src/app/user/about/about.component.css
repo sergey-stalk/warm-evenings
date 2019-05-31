@@ -32,7 +32,47 @@ footer {
 }
 
 .carousel-item {
-  background: url(https://cdn-st2.rtr-vesti.ru/vh/pictures/hd/194/792/5.png);
-  background-size: cover;
+  background-size: cover !important;
   height: 500px;
+}
+
+.first {
+  background: url(../../../assets/carusel1.jpg)
+}
+
+.second {
+  background-size: contain;
+  background: url(../../../assets/carusel2.png)
+}
+
+.third {
+  background: url(../../../assets/carusel3.jpg)
+}
+
+.carousel-caption {
+  bottom: 0;
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.carousel-caption p, h5{
+  margin: 0;
+}
+
+@media (max-width:768px) {
+  .carousel-item {
+    height: 250px !important;
+  }
+}
+
+@media (max-width:992px) {
+  .carousel-item {
+    height: 350px;
+  }
+}
+
+@media (max-width: 500px) {
+  .carousel {
+    display: none;
+  }
 }
