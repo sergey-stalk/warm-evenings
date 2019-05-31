@@ -12,4 +12,9 @@ export class FooterComponent implements OnInit {
   ngOnInit() {
   }
 
+  copy() {
+    // tslint:disable-next-line:max-line-length
+    window.open('https://mail.google.com/mail/u/0/#inbox?compose=DmwnWrRrlZkdwpWlFKxfSnBhRtwNJMpHrrrsbdxFwBXvlhPVQknWXlFmKjjNWdfGBmlwLhjGFjDb');
+  }
+
 }
