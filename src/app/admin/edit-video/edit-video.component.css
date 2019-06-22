@@ -1,0 +1,41 @@
+.card {
+  width: 12rem;
+  flex-grow: 1;
+}
+
+.viev-video {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-list-item {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+ .card a {
+   height: 100%;
+ }
+
+ .delete {
+  position: absolute !important;
+  right: 3px;
+  top: 3px;
+  color: white;
+  margin: 0;
+}
+
+.alert-list-item {
+  padding: 0;
+}
+
+.alert {
+  margin: 0;
+  padding: 5px 12px;
+}
+
+.hidden-list-item {
+  visibility: hidden;
+}

@@ -21,5 +21,7 @@ constructor() { }
     localStorage.removeItem('poems');
     localStorage.removeItem('meeting');
     localStorage.removeItem('settings');
+    localStorage.removeItem('photo');
+    localStorage.removeItem('video');
   }
 }

@@ -17,7 +17,8 @@ constructor(private http: HttpClient, private catchDataService: CatchDataService
   urlMeeting = 'https://api.myjson.com/bins/htb96';
   urlSettings = 'https://api.myjson.com/bins/mhszu';
   urlPoems = 'https://api.myjson.com/bins/ot482';
-  urlVersion = 'https://api.myjson.com/bins/12ukg8';
+  urlPhoto = 'https://api.myjson.com/bins/j1hh9';
+  urlVideo = 'https://api.myjson.com/bins/113w29';
 
   getMeetingData() {
     return this.http.get(this.urlMeeting);
@@ -60,12 +61,19 @@ constructor(private http: HttpClient, private catchDataService: CatchDataService
     this.http.put(this.urlPoems, poemsUpdate, this.httpOptions).subscribe();
   }
 
-  getVersion() {
-    return this.http.get(this.urlVersion);
+  getPhoto() {
+    return this.http.get(this.urlPhoto);
   }
 
-  updateVersion(version) {
-    this.http.put(this.urlVersion, version, this.httpOptions).subscribe();
+  updatePhoto(data) {
+    this.http.put(this.urlPhoto, data, this.httpOptions).subscribe();
+  }
+  getVideo() {
+    return this.http.get(this.urlVideo);
+  }
+
+  updateVideo(data) {
+    this.http.put(this.urlVideo, data, this.httpOptions).subscribe();
   }
 
 }

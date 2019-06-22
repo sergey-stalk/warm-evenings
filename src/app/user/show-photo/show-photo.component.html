@@ -1,0 +1,7 @@
+<div class="viev-photo">
+  <div *ngFor="let photo of dataPhoto" class="card">
+    <a data-fancybox="gallery" href="{{photo.url}}">
+      <img src="{{photo.url}}" class="card-img-top">
+    </a>
+  </div>
+</div>

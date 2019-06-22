@@ -1,0 +1,93 @@
+form {
+  display:flex;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 5px;
+}
+
+.progress {
+  height: 2px;
+}
+
+.hiden {
+  height: 2px;
+  visibility: hidden;
+}
+
+.btn-list-item {
+  padding: 0;
+  display: flex;
+}
+
+.btn-block {
+  margin: 0;
+}
+
+.card {
+  flex-grow: 1;
+}
+
+.viev-photo {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.thumb img {
+  -webkit-filter: grayscale(0);
+  filter: none;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+.thumb img:hover {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+
+.thumb {
+  padding: 5px;
+}
+
+.delete {
+  position: absolute !important;
+  right: 3px;
+  top: 3px;
+  color: white;
+  margin: 0;
+}
+
+.alert-list-item {
+  padding: 0;
+}
+
+.alert {
+  margin: 0;
+  padding: 5px 12px;
+}
+
+.hidden-list-item {
+  visibility: hidden;
+}
+
+.form-list-item {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  border: none;
+}
+ .card a {
+   height: 100%;
+ }
+
+ img {
+   height: 100%;
+ }
+
+

@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://chatapi.viber.com",
+    "target": "https://api.imgbb.com/",
     "secure": false,
     "pathRewrite": {
       "^/api": ""

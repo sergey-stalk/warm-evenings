@@ -19,12 +19,13 @@ export class NavHeaderComponent implements OnInit {
 
   isAdmin = false;
   isPoems = false;
-  version;
 
   headerLinks = [
     {name: 'Главная', link: ''},
     {name: 'Встречи', link: '/schedule'},
-    {name: 'Стихи', link: '/show_poems'}
+    {name: 'Стихи', link: '/show_poems'},
+    {name: 'Фото', link: '/show_photo'},
+    {name: 'Видео', link: '/show_video'}
   ];
 
   adminHeaderLinks = [
@@ -32,12 +33,18 @@ export class NavHeaderComponent implements OnInit {
     {name: 'Настройки', link: '/admin/settings'},
     {name: 'Сообщения', link: '/admin/message'},
     {name: 'Стихи', link: 'admin/edit_poems/edit_autor_name'},
+    {name: 'Фото', link: 'admin/edit_photo'},
+    {name: 'Видео', link: 'admin/edit_video'},
   ];
+
   adminMobileHeaderLinks = [
     {name: '<i class="fas fa-users"></i>', link: '/admin'},
     {name: '<i class="fas fa-cog"></i>', link: '/admin/settings'},
     {name: '<i class="fas fa-comment-dots"></i>', link: '/admin/message'},
     {name: '<i class="fas fa-book"></i>', link: 'admin/edit_poems/edit_autor_name'},
+    {name: '<i class="fas fa-image"></i>', link: '/admin/edit_photo'},
+    {name: '<i class="fas fa-video"></i>', link: '/admin/edit_video'}
+
   ];
 
   ngOnInit() {
@@ -55,6 +62,16 @@ export class NavHeaderComponent implements OnInit {
     if (!localStorage.settings) {
       this.apiDataService.getSettings().subscribe((settings) => {
         this.catchDataService.catch('settings', settings);
+      });
+    }
+    if (!localStorage.photo) {
+      this.apiDataService.getPhoto().subscribe((photo) => {
+        this.catchDataService.catch('photo', photo);
+      });
+    }
+    if (!localStorage.video) {
+      this.apiDataService.getVideo().subscribe((video) => {
+        this.catchDataService.catch('video', video);
       });
     }
 

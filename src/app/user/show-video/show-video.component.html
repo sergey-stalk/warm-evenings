@@ -1,0 +1,11 @@
+<div *ngIf="!dataVideo" id="preloader">
+  <div id="loader"></div>
+</div>
+
+<div *ngIf="dataVideo" class="viev-video">
+  <div *ngFor="let item of dataVideo" class="card">
+    <a data-fancybox href="item.url">
+      <img src="{{item.imgUrl}}" class="card-img-top">
+    </a>
+  </div>
+</div>

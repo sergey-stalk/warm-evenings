@@ -1,3 +1,4 @@
+import { EditVideoComponent } from './admin/edit-video/edit-video.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,6 +27,10 @@ import { RemovePoemComponent } from './admin/edit-poems/remove-poem/remove-poem.
 import { SearchAutorService } from './services/search-autor.service';
 import { SearchPoemService } from './services/search-poem.service';
 import { FooterComponent } from './footer/footer.component';
+import { EditPhotoComponent } from './admin/edit-photo/edit-photo.component';
+import { ShowPhotoComponent } from './user/show-photo/show-photo.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { ShowVideoComponent } from './user/show-video/show-video.component';
 
 
 @NgModule({
@@ -44,13 +49,18 @@ import { FooterComponent } from './footer/footer.component';
       EditPoemTextComponent,
       AddNewPoemComponent,
       RemovePoemComponent,
-      FooterComponent
+      FooterComponent,
+      EditPhotoComponent,
+      ShowPhotoComponent,
+      EditVideoComponent,
+      ShowVideoComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
       HttpClientModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      ClipboardModule
    ],
    providers: [
       ApiDataService,

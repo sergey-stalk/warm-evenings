@@ -7,13 +7,14 @@
         Fasebook</a>
       <a href="https://instagram.com/toplyye_vechera_club" target="_blank"><i class="fab fa-instagram"></i>
         Instagram</a>
-      <p (click)="copy()" class="mail"><i class="fas fa-at"></i> warmevenings@gmail.com</p>
+      <p (click)="copy()" ngxClipboard [cbContent]="'warmevenings@gmail.com'" class="mail"><i class="fas fa-at"></i> warmevenings@gmail.com</p>
     </span>
     <span class="mobile">
       <a href="https://t.me/joinchat/FOOH7BNW7VJzjHPYcqUS7A" target="_blank"><i class="fab fa-telegram"></i></a>
       <a href="https://www.facebook.com/groups/364070974209185/" target="_blank"><i class="fab fa-facebook"></i></a>
       <a href="https://instagram.com/toplyye_vechera_club" target="_blank"><i class="fab fa-instagram"></i></a>
-      <p (click)="copy()" class="mail"><i class="fas fa-at"></i></p>
+      <p (click)="copyForMobile()" ngxClipboard [cbContent]="'warmevenings@gmail.com'" class="mail"><i class="fas fa-at"></i></p>
     </span>
   </div>
 </footer>
+<div *ngIf="isCopy" class="bg-success copy-alert">Скопировано</div>

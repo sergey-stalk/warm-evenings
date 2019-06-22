@@ -7,7 +7,7 @@ export class CheckAuthService {
 constructor(private router: Router) { }
 
   checkStorage() {
-    if (localStorage.auth) {
+    if (localStorage.auth === 'true') {
       return true;
     }
     return false;
