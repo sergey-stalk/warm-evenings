@@ -42,12 +42,13 @@ export class EditVideoComponent implements OnInit {
   }
 
   delete(url, event) {
-    event.stopImmediatePropagation();
     this.dataVideo = this.dataVideo.filter((el) => {
       if (el.url !== url) {
         return el;
       }
     });
+    this.apiDataService.updateVideo(this.dataVideo);
+    this.catchDataService.updateCatch('video', this.dataVideo);
     return false;
   }
 
@@ -71,6 +72,7 @@ export class EditVideoComponent implements OnInit {
     setTimeout(() => {
       this.alreadyExists = false;
     }, 2000);
+    this.uploadVideo.reset();
   }
 
 }
