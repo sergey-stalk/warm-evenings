@@ -18,7 +18,7 @@
       <input formControlName='videoUrl' type="text" class="form-control" placeholder="Вставить ссылку на видео"
         aria-label="Recipient's username" aria-describedby="button-addon2">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Добавить</button>
+        <button [disabled]="!uploadVideo.valid" class="btn btn-outline-secondary" type="submit" id="button-addon2">Добавить</button>
       </div>
     </form>
   </li>
@@ -27,8 +27,8 @@
 <div *ngIf="dataVideo" class="viev-video">
   <div *ngFor="let item of dataVideo" class="card">
     <button (click)="delete()" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
-    <a data-fancybox href="item.url">
-      <button (click)="delete(item.url)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
+    <a data-fancybox href="{{item.url}}">
+      <button (click)="delete(item.url, $event)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
       <img src="{{item.imgUrl}}" class="card-img-top">
     </a>
   </div>

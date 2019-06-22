@@ -41,12 +41,14 @@ export class EditVideoComponent implements OnInit {
 
   }
 
-  delete(url) {
+  delete(url, event) {
+    event.stopImmediatePropagation();
     this.dataVideo = this.dataVideo.filter((el) => {
       if (el.url !== url) {
         return el;
       }
     });
+    return false;
   }
 
   sendUrl() {
