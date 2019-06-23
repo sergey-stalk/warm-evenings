@@ -18,6 +18,8 @@ export class EditVideoComponent implements OnInit {
   alreadyExists = false;
   isHidden = true;
   validForm = false;
+  token;
+  url = '';
 
   constructor(
     private catchDataService: CatchDataService,
@@ -41,7 +43,7 @@ export class EditVideoComponent implements OnInit {
 
   }
 
-  delete(url, event) {
+  delete(url) {
     this.dataVideo = this.dataVideo.filter((el) => {
       if (el.url !== url) {
         return el;
@@ -53,21 +55,28 @@ export class EditVideoComponent implements OnInit {
   }
 
   sendUrl() {
+    const fullscreen = 'https://www.youtube.com/watch?v=';
+    const mobile = 'https://youtu.be/';
+    if (this.uploadVideo.value.videoUrl.includes(fullscreen)) {
+      this.token = this.uploadVideo.value.videoUrl.split(fullscreen);
+      this.url = fullscreen + this.token[1];
+    } else  if (this.uploadVideo.value.videoUrl.includes(mobile)) {
+      this.token = this.uploadVideo.value.videoUrl.split(mobile);
+      this.url = fullscreen + this.token[1];
+    }
     this.dataVideo.map((el) => {
-      if (el.url === this.uploadVideo.value.videoUrl) {
+      if (el.url === this.url) {
         this.alreadyExists = true;
       }
     });
-
     if (!this.alreadyExists) {
-      this.dataVideo.reverse();
-      const url = this.uploadVideo.value.videoUrl;
-      const imgToken = url.split('https://www.youtube.com/watch?v=');
-      const imgUrl = this.prefix + imgToken[1] + this.postfix;
-      this.dataVideo.push({ url, imgUrl });
-      this.apiDataService.updateVideo(this.dataVideo);
-      this.catchDataService.updateCatch('video', this.dataVideo);
-      this.dataVideo.reverse();
+        this.dataVideo.reverse();
+        const url = this.url;
+        const imgUrl = this.prefix + this.token[1] + this.postfix;
+        this.dataVideo.push({ url, imgUrl });
+        this.apiDataService.updateVideo(this.dataVideo);
+        this.catchDataService.updateCatch('video', this.dataVideo);
+        this.dataVideo.reverse();
     }
     setTimeout(() => {
       this.alreadyExists = false;

@@ -99,6 +99,7 @@ export class EditPhotoComponent implements OnInit {
     this.dataPhoto.push({url: this.testImg});
     this.apiDataService.updatePhoto(this.dataPhoto);
     this.catchDataService.updateCatch('photo', this.dataPhoto);
+    this.uploadUrlForm.reset();
   }
 
   delete(url) {

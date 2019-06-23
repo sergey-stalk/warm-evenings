@@ -28,7 +28,7 @@
   <div *ngFor="let item of dataVideo" class="card">
     <button (click)="delete()" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
     <a data-fancybox href="{{item.url}}">
-      <button (click)="delete(item.url, $event)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
+      <button (click)="delete(item.url)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
       <img src="{{item.imgUrl}}" class="card-img-top">
     </a>
   </div>
