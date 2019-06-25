@@ -10,7 +10,6 @@ constructor(private catchDataService: CatchDataService) { }
     if (searchValue === '') {
       return this.catchDataService.getCatchItem('poems');
     } else {
-      console.log(searchValue, pointer);
       const sortedData = this.catchDataService.getCatchItem('poems');
       sortedData[pointer].poems = sortedData[pointer].poems.filter((el) => {
         if (el.poemName.toLowerCase().includes(searchValue.toLowerCase())) {

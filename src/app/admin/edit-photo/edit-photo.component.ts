@@ -111,7 +111,6 @@ export class EditPhotoComponent implements OnInit {
   }
 
   success() {
-    console.log(this.alreadyExists);
     if (this.uploadUrlForm.valid && !this.alreadyExists) {
       this.isHidden = false;
       this.errorAlert = '';
