@@ -1,5 +1,6 @@
 nav ol {
   margin: 0px !important;
+  line-height: 2rem;
 }
 
 .list-group-item {
@@ -24,6 +25,22 @@ nav ol {
   margin-top: 10px;
 }
 
+.list-item-poem {
+  padding: 0;
+  margin: 0;
+  border: none !important;
+  cursor: none;
+  color: black;
+}
+
 .search {
   margin-bottom: 10px !important;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.fa-arrow-circle-left {
+  font-size: 2rem;
 }

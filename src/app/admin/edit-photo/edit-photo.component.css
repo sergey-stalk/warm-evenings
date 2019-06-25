@@ -28,6 +28,7 @@ button {
 .card {
   flex-grow: 1;
   width: 16rem;
+  cursor: pointer;
 }
 
 .viev-photo {
@@ -35,7 +36,6 @@ button {
   display: flex;
   flex-wrap: wrap;
 }
-
 
 .thumb img {
   -webkit-filter: grayscale(0);

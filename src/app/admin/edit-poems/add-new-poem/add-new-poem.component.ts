@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CatchDataService } from './../../../services/catch-data.service';
 import { ApiDataService } from './../../../services/api-data.service';
 import { Component, OnInit } from '@angular/core';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-new-poem',
@@ -27,6 +28,7 @@ export class AddNewPoemComponent implements OnInit {
   isAddPoems = false;
   pointer;
   dataView;
+  alreadyExist = false;
 
   ngOnInit() {
     if (localStorage.poems) {
@@ -55,6 +57,15 @@ export class AddNewPoemComponent implements OnInit {
     this.searchAutor.valueChanges.subscribe((changes) => {
       this.dataView = this.searchAutorService.sortByAutorName(changes.autor);
     });
+
+    this.addPoemForm.valueChanges.subscribe((changes) => {
+      this.alreadyExist = false;
+      this.dataPoems[this.pointer].poems.map((el) => {
+        if (changes.poemName === el.poemName) {
+          this.alreadyExist = true;
+        }
+      });
+    });
   }
 
 
@@ -73,7 +84,7 @@ export class AddNewPoemComponent implements OnInit {
     this.addAutorForm.reset();
     this.addingAutor();
     this.dataView = this.searchAutorService.sortByAutorName('');
-    this.searchAutor.setValue({autor: ''});
+    this.searchAutor.setValue({ autor: '' });
   }
 
   addPoem() {
@@ -97,11 +108,14 @@ export class AddNewPoemComponent implements OnInit {
   }
 
 
-  cancel() {
+  cancel(type) {
+    if (type === 'autor') {
+      this.addAutorForm.reset();
+    } else {
+      this.addPoemForm.reset();
+    }
     this.isAddAutor = false;
     this.isAddPoems = false;
-    this.addPoemForm.reset();
-    this.addAutorForm.reset();
   }
 
 }

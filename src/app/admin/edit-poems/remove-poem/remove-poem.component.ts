@@ -55,6 +55,7 @@ export class RemovePoemComponent implements OnInit {
       }
     });
     this.apiDataService.updatePoems(this.dataPoems);
+    this.catchDataService.updateCatch('poems', this.dataPoems);
     this.selectAutor.reset();
   }
 
@@ -65,6 +66,7 @@ export class RemovePoemComponent implements OnInit {
       }
     });
     this.apiDataService.updatePoems(this.dataPoems);
+    this.catchDataService.updateCatch('poems', this.dataPoems);
     this.selectPoem.reset();
     this.isSelectedAutor = false;
   }

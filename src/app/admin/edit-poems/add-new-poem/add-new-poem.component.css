@@ -25,3 +25,14 @@
 textArea {
   width: 100%;
 }
+
+.alert-danger {
+  margin-bottom: 10px;
+  padding-bottom: 5px !important;
+  padding-top: 5px !important;
+}
+
+.hidden {
+  visibility: hidden;
+  height: 46px;
+}

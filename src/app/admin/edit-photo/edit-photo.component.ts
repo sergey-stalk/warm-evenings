@@ -27,6 +27,7 @@ export class EditPhotoComponent implements OnInit {
   isHidden = true;
   testImg = '../../../assets/logo-dark.png';
   validForm = false;
+  isMobile = false;
 
 
   constructor(
@@ -36,13 +37,18 @@ export class EditPhotoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      this.isMobile = true;
+    }
     if (!localStorage.photo) {
       this.apiDataService.getPhoto().subscribe((dataPhoto) => {
         this.dataPhoto = dataPhoto;
         this.catchDataService.updateCatch('photo', this.dataPhoto);
+        this.dataPhoto.reverse();
       });
     } else {
       this.dataPhoto = this.catchDataService.getCatchItem('photo');
+      this.dataPhoto.reverse();
     }
 
     this.uploadFileForm = new FormGroup({
@@ -55,11 +61,29 @@ export class EditPhotoComponent implements OnInit {
 
     this.uploadUrlForm.valueChanges.pipe(debounceTime(500))
       .subscribe((changes) => {
-        if (changes.photoUrl.length !== '') {
-          this.testImg = changes.photoUrl;
+        if (changes.photoUrl !== '' || changes.photoUrl) {
+          this.dataPhoto.map((el) => {
+            if (el.url === changes.photoUrl) {
+              this.alreadyExists = true;
+            }
+          });
+          if (!this.alreadyExists) {
+            this.testImg = changes.photoUrl;
+          } else if (!this.successAlert) {
+            this.errorAlert = 'Уже добавлена';
+            this.isHidden = false;
+          } else {
+            this.errorAlert = '';
+            this.alreadyExists = false;
+          }
         } else {
+          this.errorAlert = '';
+          this.successAlert = '';
+          this.isHidden = true;
           this.testImg = '';
           this.validForm = false;
+          this.alreadyExists = false;
+
         }
       });
   }
@@ -87,7 +111,8 @@ export class EditPhotoComponent implements OnInit {
   }
 
   success() {
-    if (this.uploadUrlForm.valid) {
+    console.log(this.alreadyExists);
+    if (this.uploadUrlForm.valid && !this.alreadyExists) {
       this.isHidden = false;
       this.errorAlert = '';
       this.validForm = true;
@@ -96,13 +121,21 @@ export class EditPhotoComponent implements OnInit {
   }
 
   addUrl() {
-    this.dataPhoto.push({url: this.testImg});
+    this.dataPhoto.reverse();
+    this.successAlert = 'Добавлено';
+    this.dataPhoto.push({ url: this.testImg });
     this.apiDataService.updatePhoto(this.dataPhoto);
     this.catchDataService.updateCatch('photo', this.dataPhoto);
+    setTimeout(() => {
+      this.successAlert = '';
+      this.isHidden = true;
+    }, 2000);
     this.uploadUrlForm.reset();
+    this.dataPhoto.reverse();
   }
 
   delete(url) {
+    this.dataPhoto.reverse();
     this.dataPhoto = this.dataPhoto.filter((el) => {
       if (el.url !== url) {
         return el;
@@ -110,6 +143,8 @@ export class EditPhotoComponent implements OnInit {
     });
     this.apiDataService.updatePhoto(this.dataPhoto);
     this.catchDataService.updateCatch('photo', this.dataPhoto);
+    this.dataPhoto.reverse();
+    return false;
   }
 
   send() {
@@ -133,16 +168,18 @@ export class EditPhotoComponent implements OnInit {
         this.dataPhoto.map((el) => {
           if (el.url === this.imageUrl) {
             this.alreadyExists = true;
-            this.errorAlert = 'Уже существует';
+            this.errorAlert = 'Уже добавлена';
             this.isHidden = false;
           }
         });
         if (!this.alreadyExists) {
+          this.dataPhoto.reverse();
           this.dataPhoto.push({ url: this.imageUrl });
           this.apiDataService.updatePhoto(this.dataPhoto);
           this.catchDataService.updateCatch('photo', this.dataPhoto);
           this.successAlert = 'Добавлено в галерею';
           this.isHidden = false;
+          this.dataPhoto.reverse();
           setTimeout(() => {
             this.successAlert = '';
             this.isHidden = true;

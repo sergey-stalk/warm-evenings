@@ -8,6 +8,7 @@ export class SearchAutorService {
 constructor(private catchDataService: CatchDataService) { }
 
   sortByAutorName(searchValue) {
+    console.log(searchValue);
     if (searchValue === '') {
       return this.catchDataService.getCatchItem('poems');
     } else {

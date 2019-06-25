@@ -13,24 +13,29 @@
   <ul class="list-group" *ngIf="scrin === 'autor'">
     <li class="list-group-item list-item-form">
       <form [formGroup]="searchAutor" class="input-group mb-3 search">
-        <input type="text" class="form-control" formControlName="autor">
+        <input type="text" class="form-control" formControlName="autor" placeholder="Поиск по имени автора">
       </form>
     </li>
-    <li (click)="showPoemsList(item.name)" *ngFor="let item of dataView" class="list-group-item">{{item.name}}
+    <li (click)="showPoemsList(item.name)" *ngFor="let item of dataView" class="list-group-item">
+      {{item.name}}
     </li>
   </ul>
 
   <ul class="list-group" *ngIf="scrin === 'poemsList'">
     <li class="list-group-item list-item-form">
       <form [formGroup]="searchPoem" class="input-group mb-3 search">
-        <input type="text" class="form-control" formControlName="poem">
+        <input type="text" class="form-control" formControlName="poem" placeholder="Поиск по названию стиха">
       </form>
     </li>
-    <li (click)="showPoem(poems.poemName)" *ngFor="let poems of dataView[history[0]].poems; let i = index" class="list-group-item">
+    <li (click)="showPoem(poems.poemName)" *ngFor="let poems of dataView[history[0]].poems; let i = index"
+      class="list-group-item">
       {{poems.poemName}}</li>
   </ul>
-
-  <div *ngIf="scrin === 'poem'" class="poem">
-    <h4>{{this.dataPoems[this.history[0]].poems[history[1]].poem}}</h4>
-  </div>
+  <ul class="list-group">
+    <li class="list-group-item list-item-poem">
+      <div *ngIf="scrin === 'poem'" class="poem">
+        <h4>{{dataPoems[this.history[0]].poems[history[1]].poem}}</h4>
+      </div>
+    </li>
+  </ul>
 </div>

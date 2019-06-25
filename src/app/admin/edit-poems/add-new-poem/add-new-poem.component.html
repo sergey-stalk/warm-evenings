@@ -18,7 +18,7 @@
           aria-label="Recipient's username" aria-describedby="button-addon1">
         <div class="input-group-append">
           <button class="btn btn-outline-success" type="submit" id="button-addon1"><i class="fas fa-check"></i></button>
-          <button (click)="cancel()" class="btn btn-outline-danger" type="button" id="button-addon1"><i
+          <button (click)="cancel('autor')" class="btn btn-outline-danger" type="button" id="button-addon1"><i
               class="fas fa-times"></i></button>
         </div>
       </form>
@@ -28,18 +28,25 @@
         <input type="text" class="form-control" formControlName="autor">
       </form>
     </li>
-    <li (click)="addingPoem(item.name)" *ngFor="let item of dataView; let i = index" class="list-group-item">{{item.name}}</li>
+    <li (click)="addingPoem(item.name)" *ngFor="let item of dataView; let i = index" class="list-group-item">
+      {{item.name}}</li>
   </ul>
 
   <ul *ngIf="isAddPoems" class="list-group">
     <li class="list-item-form list-group-item">
+      <div *ngIf="!alreadyExist" class="hidden" role="alert">
+        /
+      </div>
+      <div *ngIf="alreadyExist" class="alert alert-danger" role="alert">
+        Такое название уже существует
+      </div>
       <form [formGroup]="addPoemForm" (submit)='addPoem()' class="form-group">
         <input formControlName="poemName" type="text" class="form-control" placeholder="Название стиха"
           aria-describedby="button-addon1">
         <br>
         <textarea type='text' formControlName="poemText" rows="5" wrap="soft" placeholder="Текст стиха"></textarea>
-        <button class="btn btn-outline-success" type="submit" id="button-addon1"><i class="fas fa-check"></i></button>
-        <button (click)="cancel()" class="btn btn-outline-danger" type="button" id="button-addon1"><i
+        <button class="btn btn-outline-success" type="submit" [disabled]="alreadyExist" id="button-addon1"><i class="fas fa-check"></i></button>
+        <button (click)="cancel('poem')" class="btn btn-outline-danger" type="button" id="button-addon1"><i
             class="fas fa-times"></i></button>
       </form>
     </li>

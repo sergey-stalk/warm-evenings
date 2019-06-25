@@ -62,6 +62,7 @@ export class ShowPoemsComponent implements OnInit {
   }
 
   showPoemsList(item) {
+    this.dataView = this.catchDataService.getCatchItem('poems');
     this.dataPoems.map((el, i) => {
       if (el.name === item) {
         this.pointer = i;
@@ -70,7 +71,6 @@ export class ShowPoemsComponent implements OnInit {
     this.scrin = 'poemsList';
     this.wayOfPoems.push(this.dataPoems[this.pointer].name);
     this.history.push(this.pointer);
-    console.log(this.dataPoems[this.history[0]].poems);
   }
 
   showPoem(item) {
@@ -91,6 +91,9 @@ export class ShowPoemsComponent implements OnInit {
     }
     if (this.wayOfPoems.length === 0) {
       this.scrin = 'autor';
+      if (this.searchAutor.value.autor !== null) {
+        this.dataView = this.searchAutorService.sortByAutorName(this.searchAutor.value.autor);
+      }
     }
     if (this.wayOfPoems.length === 1) {
       this.scrin = 'poemsList';

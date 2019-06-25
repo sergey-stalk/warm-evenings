@@ -34,7 +34,7 @@
 
     <ul class="list-group">
       <li class="form-list-item list-group-item">
-        <form [formGroup]="uploadFileForm" enctype="multipart/form-data" (submit)="send()">
+        <form *ngIf="!isMobile" [formGroup]="uploadFileForm" enctype="multipart/form-data" (submit)="send()">
           <div class="form-group">
             <input accept="image/*" class="form-control-file" (change)='addFile($event)' type="file"
               formControlName='file'>
@@ -54,8 +54,10 @@
   </div>
   <div class="viev-photo">
     <div *ngFor="let photo of dataPhoto" class="card">
-      <button (click)="delete(photo.url)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
-      <img src="{{photo.url}}" class="card-img-top">
+      <a data-fancybox href="{{photo.url}}">
+        <button (click)="delete(photo.url)" class="btn btn-dark delete"><i class="fas fa-times"></i></button>
+        <img src="{{photo.url}}" class="card-img-top">
+      </a>
     </div>
   </div>
 </div>
